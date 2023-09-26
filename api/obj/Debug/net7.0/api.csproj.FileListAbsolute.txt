@@ -31,3 +31,13 @@
 /Users/franklinmoon/Documents/Github/budget-sherpa/api/obj/Debug/net7.0/api.pdb
 /Users/franklinmoon/Documents/Github/budget-sherpa/api/obj/Debug/net7.0/api.genruntimeconfig.cache
 /Users/franklinmoon/Documents/Github/budget-sherpa/api/obj/Debug/net7.0/ref/api.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.AspNetCore.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.Extensions.Hosting.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.Extensions.Logging.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.Formatting.Compact.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.Settings.Configuration.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.Sinks.Console.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.Sinks.Debug.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/Serilog.Sinks.File.dll
