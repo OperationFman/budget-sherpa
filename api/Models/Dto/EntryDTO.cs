@@ -1,14 +1,26 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Entries.Models.Dto {
+namespace Entries.Models.Dto
+{
 
-    public class EntryDto {
-        public int Id { get; set; }
+    public class EntryDto
+    {
+        [Required]
+        public required int Id { get; set; }
 
         [Required]
         [MaxLength(60)]
-        public string Country { get; set; }
+        public required string Country { get; set; }
 
-        public int Extras { get; set; }
+        [Required]
+        public required int Days { get; set; }
+
+        public Commute? Commute { get; set; }
+
+        public int? CommuteCost { get; set; }
+
+        public int? Extras { get; set; }
+
+        public int? DailyCost { get; set; }
     }
 }
