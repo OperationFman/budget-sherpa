@@ -41,5 +41,42 @@ namespace Entries.Controller {
 
             return Ok(entryDto);
         }
+
+        [HttpDelete("id")]
+        public IActionResult DeleteEntry(int id) {
+            
+            if (id == 0) {
+                return BadRequest();
+            }
+
+            EntryDto? entryDto = EntryStore.entryList.FirstOrDefault(u => u.Id == id);
+            
+            if (entryDto == null) {
+                return NotFound();
+            }
+            
+            EntryStore.entryList.Remove(entryDto);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        public IActionResult UpdateEntry([FromBody]EntryDto entryDto) {
+            
+            if (entryDto == null) {
+                return BadRequest();
+            }
+
+            EntryDto? existingEntryDto = EntryStore.entryList.FirstOrDefault(u => u.Id == entryDto.Id);
+
+            if (existingEntryDto == null) {
+                return NotFound();
+            }
+
+            EntryStore.entryList.Remove(existingEntryDto);
+            EntryStore.entryList.Add(entryDto);
+
+            return NoContent();
+        }
     }
 }
