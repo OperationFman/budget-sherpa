@@ -6,9 +6,17 @@ using Entries.Models;
 namespace Entries.Controller {
     [Route("api/entries")]
     [ApiController]
-    public class Entries : ControllerBase {
+    public class EntriesController : ControllerBase {
+        private readonly ILogger<EntriesController> _logger;
+
+        public EntriesController(ILogger<EntriesController> Logger) {
+            _logger = Logger;
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<EntryDto>> GetEntries() {
+            _logger.LogInformation("Getting all entries");
+
             return Ok(EntryStore.entryList);
         }
 
@@ -21,6 +29,7 @@ namespace Entries.Controller {
             EntryDto? entry = EntryStore.entryList.FirstOrDefault(u=>u.Id==id);
             
             if (entry == null) {
+                _logger.LogError($"Couldn't find entry with id: {id}");
                 return NotFound();
             }
 
