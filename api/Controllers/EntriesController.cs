@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Entries.Models.Dto;
 using Entries.Data;
 using Entries.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Entries.Controller
 {
@@ -10,10 +12,12 @@ namespace Entries.Controller
     public class EntriesController : ControllerBase
     {
         private readonly ILogger<EntriesController> _logger;
+        private readonly ApiDbContext _context;
 
-        public EntriesController(ILogger<EntriesController> Logger)
+        public EntriesController(ILogger<EntriesController> Logger, ApiDbContext context)
         {
             _logger = Logger;
+            _context = context;
         }
 
         [HttpGet]
@@ -21,7 +25,7 @@ namespace Entries.Controller
         {
             _logger.LogInformation("Getting all entries");
 
-            return Ok(EntryStore.entryList);
+            return Ok(_context.Entry.ToList());
         }
 
         [HttpGet("id")]
@@ -32,7 +36,7 @@ namespace Entries.Controller
                 return BadRequest();
             }
 
-            EntryDto? entry = EntryStore.entryList.FirstOrDefault(u => u.Id == id);
+            Entry? entry = _context.Entry.FirstOrDefault(u => u.Id == id);
 
             if (entry == null)
             {
@@ -54,11 +58,24 @@ namespace Entries.Controller
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            entryDto.Id = EntryStore.entryList.OrderByDescending(u => u.Id).FirstOrDefault()?.Id + 1 ?? 1;
 
-            EntryStore.entryList.Add(entryDto);
+            entryDto.Id = _context.Entry.OrderByDescending(u => u.Id).FirstOrDefault()?.Id + 1 ?? 1;
 
-            return Ok(entryDto);
+            Entry validatedEntry = new()
+            {
+                Id = entryDto.Id,
+                Country = entryDto.Country,
+                Days = entryDto.Days,
+                Commute = entryDto.Commute,
+                CommuteCost = entryDto.CommuteCost,
+                Extras = entryDto.Extras,
+                DailyCost = entryDto.DailyCost
+            };
+
+            _context.Entry.Add(entity: validatedEntry);
+            _context.SaveChanges();
+
+            return Ok(validatedEntry);
         }
 
         [HttpDelete("id")]
@@ -70,14 +87,15 @@ namespace Entries.Controller
                 return BadRequest();
             }
 
-            EntryDto? entryDto = EntryStore.entryList.FirstOrDefault(u => u.Id == id);
+            Entry? entry = _context.Entry.FirstOrDefault(u => u.Id == id);
 
-            if (entryDto == null)
+            if (entry == null)
             {
                 return NotFound();
             }
 
-            EntryStore.entryList.Remove(entryDto);
+            _context.Entry.Remove(entity: entry);
+            _context.SaveChanges();
 
             return NoContent();
         }
@@ -91,15 +109,27 @@ namespace Entries.Controller
                 return BadRequest();
             }
 
-            EntryDto? existingEntryDto = EntryStore.entryList.FirstOrDefault(u => u.Id == entryDto.Id);
+            Entry? existingEntry = _context.Entry.FirstOrDefault(u => u.Id == entryDto.Id);
 
-            if (existingEntryDto == null)
+            if (existingEntry == null)
             {
                 return NotFound();
             }
 
-            EntryStore.entryList.Remove(existingEntryDto);
-            EntryStore.entryList.Add(entryDto);
+            Entry validatedEntry = new()
+            {
+                Id = entryDto.Id,
+                Country = entryDto.Country,
+                Days = entryDto.Days,
+                Commute = entryDto.Commute,
+                CommuteCost = entryDto.CommuteCost,
+                Extras = entryDto.Extras,
+                DailyCost = entryDto.DailyCost
+            };
+
+            _context.Entry.Remove(entity: existingEntry);
+            _context.Entry.Add(entity: validatedEntry);
+            _context.SaveChanges();
 
             return NoContent();
         }
