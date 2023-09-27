@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Entries.Models.Dto;
-using Entries.Data;
 using Entries.Models;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Entries.Controller
 {
