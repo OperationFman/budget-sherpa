@@ -6,7 +6,7 @@ namespace Mappings
 {
     public class EntryMapper
     {
-        public Entry MapEntryDtoToEntry(EntryDto entryDto)
+        public static Entry MapEntryDtoToEntry(EntryDto entryDto)
         {
             return new Entry
             {
