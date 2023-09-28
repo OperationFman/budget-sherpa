@@ -57,6 +57,8 @@ namespace Entries.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
+            var foo = _context.CountryRate.ToList();
+
             entryDto.Id = _context.Entry.OrderByDescending(u => u.Id).FirstOrDefault()?.Id + 1 ?? 1;
             Entry mappedEntry = EntryMapper.MapEntryDtoToEntry(entryDto);
 
