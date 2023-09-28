@@ -48,16 +48,22 @@ namespace Entries.Controller
         [HttpPost]
         public ActionResult<EntryDto> CreateEntry([FromBody] EntryDto entryDto)
         {
-            if (entryDto == null)
+            if (entryDto == null || entryDto.Country == null)
             {
                 return BadRequest();
             }
+
+            var countryRate = _context.CountryRate.FirstOrDefault(u => u.Country == entryDto.Country);
+
+            if (countryRate == null)
+            {
+                return NotFound();
+            }
+
             if (entryDto.Id > 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-
-            var foo = _context.CountryRate.ToList();
 
             entryDto.Id = _context.Entry.OrderByDescending(u => u.Id).FirstOrDefault()?.Id + 1 ?? 1;
             Entry mappedEntry = EntryMapper.MapEntryDtoToEntry(entryDto);
