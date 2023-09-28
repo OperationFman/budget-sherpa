@@ -12,6 +12,5 @@ namespace Entries.Models
         public Commute? Commute { get; set; }
         public int? CommuteCost { get; set; }
         public int? Extras { get; set; }
-        public int? DailyCost { get; set; }
     }
 }

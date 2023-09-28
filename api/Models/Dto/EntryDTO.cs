@@ -20,7 +20,5 @@ namespace Entries.Models.Dto
         public int? CommuteCost { get; set; }
 
         public int? Extras { get; set; }
-
-        public int? DailyCost { get; set; }
     }
 }

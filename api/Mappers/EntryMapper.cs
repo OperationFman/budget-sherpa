@@ -15,8 +15,7 @@ namespace Mappings
                 Days = entryDto.Days,
                 Commute = entryDto.Commute,
                 CommuteCost = entryDto.CommuteCost,
-                Extras = entryDto.Extras,
-                DailyCost = DailyCost.GetDailyCost()
+                Extras = entryDto.Extras
             };
         }
     }
