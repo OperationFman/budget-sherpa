@@ -1,6 +1,5 @@
 using Entries.Models;
 using Entries.Models.Dto;
-using CoreLogic;
 
 namespace Mappings
 {
@@ -16,6 +15,26 @@ namespace Mappings
                 Commute = entryDto.Commute,
                 CommuteCost = entryDto.CommuteCost,
                 Extras = entryDto.Extras
+            };
+        }
+
+        public static ExpandedEntryDto? MapEntryToExpandedEntryDto(Entry entry, ApiDbContext _context)
+        {
+            var countryRate = _context.CountryRate.FirstOrDefault(u => u.Country == entry.Country);
+
+            if (countryRate == null)
+            {
+                return null;
+            }
+
+            return new ExpandedEntryDto
+            {
+                Id = entry.Id,
+                CountryRates = countryRate,
+                Days = entry.Days,
+                Commute = entry.Commute,
+                CommuteCost = entry.CommuteCost,
+                Extras = entry.Extras
             };
         }
     }

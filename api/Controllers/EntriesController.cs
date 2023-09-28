@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Entries.Models.Dto;
 using Entries.Models;
 using Mappings;
+using Country.Models;
 
 namespace Entries.Controller
 {
@@ -26,6 +27,14 @@ namespace Entries.Controller
             return Ok(_context.Entry.ToList());
         }
 
+        [HttpGet("country-rates")]
+        public ActionResult<IEnumerable<CountryRate>> GetCountryRates()
+        {
+            _logger.LogInformation("Getting all countries and their rates");
+
+            return Ok(_context.CountryRate.ToList());
+        }
+
         [HttpGet("id")]
         public ActionResult<EntryDto> GetEntry(int id)
         {
@@ -42,7 +51,14 @@ namespace Entries.Controller
                 return NotFound();
             }
 
-            return Ok(entry);
+            ExpandedEntryDto? expandedEntryDto = EntryMapper.MapEntryToExpandedEntryDto(entry, _context);
+
+            if (expandedEntryDto == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok(expandedEntryDto);
         }
 
         [HttpPost]
@@ -71,7 +87,16 @@ namespace Entries.Controller
             _context.Entry.Add(entity: mappedEntry);
             _context.SaveChanges();
 
-            return Ok(mappedEntry);
+
+            ExpandedEntryDto? expandedEntryDto = EntryMapper.MapEntryToExpandedEntryDto(mappedEntry, _context);
+
+            if (expandedEntryDto == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok(expandedEntryDto);
+
         }
 
         [HttpDelete("id")]

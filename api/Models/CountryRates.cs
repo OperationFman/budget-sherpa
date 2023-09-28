@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CountryRate.Models
+namespace Country.Models
 {
     public class CountryRate
     {
