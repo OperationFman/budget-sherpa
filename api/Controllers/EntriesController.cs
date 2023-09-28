@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Entries.Models.Dto;
 using Entries.Models;
+using Mappings;
 
 namespace Entries.Controller
 {
@@ -10,11 +11,13 @@ namespace Entries.Controller
     {
         private readonly ILogger<EntriesController> _logger;
         private readonly ApiDbContext _context;
+        private readonly EntryMapper _mapper;
 
-        public EntriesController(ILogger<EntriesController> Logger, ApiDbContext context)
+        public EntriesController(ILogger<EntriesController> logger, ApiDbContext context, EntryMapper mapper)
         {
-            _logger = Logger;
+            _logger = logger;
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -57,22 +60,12 @@ namespace Entries.Controller
             }
 
             entryDto.Id = _context.Entry.OrderByDescending(u => u.Id).FirstOrDefault()?.Id + 1 ?? 1;
+            Entry mappedEntry = _mapper.MapEntryDtoToEntry(entryDto);
 
-            Entry validatedEntry = new()
-            {
-                Id = entryDto.Id,
-                Country = entryDto.Country,
-                Days = entryDto.Days,
-                Commute = entryDto.Commute,
-                CommuteCost = entryDto.CommuteCost,
-                Extras = entryDto.Extras,
-                DailyCost = entryDto.DailyCost
-            };
-
-            _context.Entry.Add(entity: validatedEntry);
+            _context.Entry.Add(entity: mappedEntry);
             _context.SaveChanges();
 
-            return Ok(validatedEntry);
+            return Ok(mappedEntry);
         }
 
         [HttpDelete("id")]
@@ -113,19 +106,8 @@ namespace Entries.Controller
                 return NotFound();
             }
 
-            Entry validatedEntry = new()
-            {
-                Id = entryDto.Id,
-                Country = entryDto.Country,
-                Days = entryDto.Days,
-                Commute = entryDto.Commute,
-                CommuteCost = entryDto.CommuteCost,
-                Extras = entryDto.Extras,
-                DailyCost = entryDto.DailyCost
-            };
-
             _context.Entry.Remove(entity: existingEntry);
-            _context.Entry.Add(entity: validatedEntry);
+            _context.Entry.Add(entity: _mapper.MapEntryDtoToEntry(entryDto));
             _context.SaveChanges();
 
             return NoContent();
