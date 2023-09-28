@@ -27,6 +27,14 @@ namespace Entries.Controller
             return Ok(_context.Entry.ToList());
         }
 
+        [HttpGet("countries")]
+        public ActionResult<IEnumerable<CountryRate>> GetCountries()
+        {
+            _logger.LogInformation("Getting all countries names");
+
+            return Ok(_context.CountryRate.Select(e => e.Country).ToList());
+        }
+
         [HttpGet("country-rates")]
         public ActionResult<IEnumerable<CountryRate>> GetCountryRates()
         {
