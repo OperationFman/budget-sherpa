@@ -1,0 +1,18 @@
+@import "../theme/breakpoints";
+
+.pageContainer {
+	max-width: $large-screen;
+	margin: 0 auto;
+	padding: 0 18px;
+}
+
+.addCountryCard {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.addCountryIcon {
+	font-size: 54px;
+	opacity: 0.15;
+}

@@ -16,12 +16,12 @@ export const Header = () => {
 						</div>
 
 						<div className={styles.headerMobileEditButton}>
-							<EditIcon fontSize='medium' />
+							<EditIcon fontSize='medium' className={styles.editButton} />
 						</div>
 					</div>
 					<div className={styles.budgetRemainingText}>$6,700 Under-Budget</div>
 					<div className={styles.headerDesktopEditButton}>
-						<EditIcon fontSize='medium' />
+						<EditIcon fontSize='medium' className={styles.editButton} />
 					</div>
 				</div>
 			</div>

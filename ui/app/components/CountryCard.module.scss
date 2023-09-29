@@ -1,0 +1,21 @@
+.cardContainer {
+	width: 100%;
+	min-height: 150px;
+	margin-top: 32px;
+
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	background: linear-gradient(
+		131deg,
+		rgba(255, 255, 255, 0.1) 7.16%,
+		rgba(255, 255, 255, 0.02) 90.14%
+	);
+	box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.2);
+	backdrop-filter: blur(100px);
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.05);
+		transition: linear 200ms;
+		cursor: pointer;
+	}
+}
