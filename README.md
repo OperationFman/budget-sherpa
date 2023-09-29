@@ -4,4 +4,4 @@ Ensure navigated to `/api`
 
 - `export PATH="$PATH:$HOME/.dotnet/tools/"`
 - `dotnet ef migrations add "initial_migrations"`
-- `dotnet ef database update``
+- `dotnet ef database update`

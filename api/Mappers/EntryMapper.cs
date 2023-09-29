@@ -30,7 +30,13 @@ namespace Mappings
             return new ExpandedEntryDto
             {
                 Id = entry.Id,
-                CountryRates = countryRate,
+                Country = entry.Country,
+                CountryRates = new CountryRatesDto
+                {
+                    Backpacker = countryRate.Backpacker,
+                    Average = countryRate.Average,
+                    Luxury = countryRate.Luxury
+                },
                 Days = entry.Days,
                 Commute = entry.Commute,
                 CommuteCost = entry.CommuteCost,

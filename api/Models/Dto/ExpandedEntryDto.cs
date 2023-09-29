@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Country.Models;
 
 namespace Entries.Models.Dto
 {
@@ -10,7 +9,10 @@ namespace Entries.Models.Dto
         public required int Id { get; set; }
 
         [Required]
-        public required CountryRate CountryRates { get; set; }
+        public required string Country { get; set; }
+
+        [Required]
+        public required CountryRatesDto CountryRates { get; set; }
 
         [Required]
         public required int Days { get; set; }
@@ -20,5 +22,14 @@ namespace Entries.Models.Dto
         public int? CommuteCost { get; set; }
 
         public int? Extras { get; set; }
+    }
+
+    public class CountryRatesDto
+    {
+        public int Backpacker { get; set; }
+
+        public int Average { get; set; }
+
+        public int Luxury { get; set; }
     }
 }

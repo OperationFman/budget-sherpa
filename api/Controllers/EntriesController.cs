@@ -145,11 +145,20 @@ namespace Entries.Controller
                 return NotFound();
             }
 
+            Entry entry = EntryMapper.MapEntryDtoToEntry(entryDto);
+
             _context.Entry.Remove(entity: existingEntry);
-            _context.Entry.Add(entity: EntryMapper.MapEntryDtoToEntry(entryDto));
+            _context.Entry.Add(entity: entry);
             _context.SaveChanges();
 
-            return NoContent();
+            ExpandedEntryDto? expandedEntryDto = EntryMapper.MapEntryToExpandedEntryDto(entry, _context);
+
+            if (expandedEntryDto == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok(expandedEntryDto);
         }
     }
 }
