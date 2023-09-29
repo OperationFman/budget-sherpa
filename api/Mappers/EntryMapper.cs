@@ -11,6 +11,7 @@ namespace Mappings
             {
                 Id = entryDto.Id,
                 Country = entryDto.Country,
+                SelectedCountryRate = entryDto.SelectedCountryRate,
                 Days = entryDto.Days,
                 Commute = entryDto.Commute,
                 CommuteCost = entryDto.CommuteCost,

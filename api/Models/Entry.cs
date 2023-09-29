@@ -8,6 +8,7 @@ namespace Entries.Models
         [Key]
         public required int Id { get; set; }
         public required string Country { get; set; }
+        public required SelectedCountryRate SelectedCountryRate { get; set; }
         public required int Days { get; set; }
         public Commute? Commute { get; set; }
         public int? CommuteCost { get; set; }

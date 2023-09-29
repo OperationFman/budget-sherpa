@@ -13,6 +13,9 @@ namespace Entries.Models.Dto
         public required string Country { get; set; }
 
         [Required]
+        public required SelectedCountryRate SelectedCountryRate { get; set; }
+
+        [Required]
         public required int Days { get; set; }
 
         public Commute? Commute { get; set; }

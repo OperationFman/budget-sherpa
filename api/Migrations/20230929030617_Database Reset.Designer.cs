@@ -10,14 +10,33 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace api.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230926131933_initial_migrations")]
-    partial class initial_migrations
+    [Migration("20230929030617_Database Reset")]
+    partial class DatabaseReset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
+
+            modelBuilder.Entity("Country.Models.CountryRate", b =>
+                {
+                    b.Property<string>("Country")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Average")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Backpacker")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Luxury")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Country");
+
+                    b.ToTable("CountryRate");
+                });
 
             modelBuilder.Entity("Entries.Models.Entry", b =>
                 {
@@ -35,13 +54,13 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DailyCost")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Days")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("Extras")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SelectedCountryRate")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

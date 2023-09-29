@@ -16,6 +16,25 @@ namespace api.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.11");
 
+            modelBuilder.Entity("Country.Models.CountryRate", b =>
+                {
+                    b.Property<string>("Country")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Average")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Backpacker")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Luxury")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Country");
+
+                    b.ToTable("CountryRate");
+                });
+
             modelBuilder.Entity("Entries.Models.Entry", b =>
                 {
                     b.Property<int>("Id")
@@ -32,13 +51,13 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("DailyCost")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("Days")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("Extras")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SelectedCountryRate")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

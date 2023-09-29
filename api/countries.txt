@@ -1,11 +1,4 @@
-CREATE TABLE countries (
-  Country TEXT PRIMARY KEY,
-  Backpacker INTEGER,
-  Average INTEGER,
-  Luxury INTEGER
-);
-
-INSERT INTO countries VALUES
+INSERT INTO CountryRate VALUES
   ('Afghanistan', 25, 50, 100),
   ('Albania', 30, 60, 120),
   ('Algeria', 25, 50, 100),
