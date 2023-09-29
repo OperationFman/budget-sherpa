@@ -4,6 +4,8 @@ using Entries.Models;
 using Mappings;
 using Country.Models;
 
+
+// TODO: Validation & Useful errors, Service layer & comprehensive logging
 namespace Entries.Controller
 {
     [Route("api/entries")]
@@ -20,11 +22,20 @@ namespace Entries.Controller
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<EntryDto>> GetEntries()
+        public ActionResult<IEnumerable<ExpandedEntryDto>> GetEntries()
         {
             _logger.LogInformation("Getting all entries");
 
-            return Ok(_context.Entry.ToList());
+            List<Entry> entries = _context.Entry.ToList();
+
+            List<ExpandedEntryDto?> expandedEntries = entries.Select(i => EntryMapper.MapEntryToExpandedEntryDto(i, _context)).ToList();
+
+            if (expandedEntries == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok(expandedEntries);
         }
 
         [HttpGet("countries")]
