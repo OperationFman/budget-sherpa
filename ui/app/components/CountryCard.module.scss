@@ -1,6 +1,10 @@
+@import "../../theme/breakpoints";
+
+$cardHeight: 100px;
+
 .cardContainer {
 	width: 100%;
-	min-height: 150px;
+	min-height: 120px;
 	margin-top: 32px;
 
 	border-radius: 10px;
@@ -15,6 +19,147 @@
 
 	&:hover {
 		background-color: rgba(255, 255, 255, 0.05);
+		transition: linear 200ms;
+		cursor: pointer;
+	}
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+
+	@include breakpoint(medium) {
+		min-height: $cardHeight;
+	}
+}
+
+.cardInfoContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	width: 100%;
+	height: $cardHeight;
+
+	@include breakpoint(medium) {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		height: 100%;
+	}
+}
+
+.titleContainer {
+	width: 100%;
+
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.title {
+	padding: 5px 0 0 20px;
+	max-width: 250px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+
+	@include breakpoint(medium) {
+		max-width: 200px;
+	}
+
+	@include breakpoint(large) {
+		padding: 0 80px;
+
+		white-space: normal;
+		text-overflow: unset;
+		overflow: visible;
+	}
+}
+
+.commuteAndDays {
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.commute {
+	width: 180px;
+	margin-left: 20px;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.commuteIcon {
+	transform: rotate(180deg);
+	margin-right: 5px;
+}
+
+.commuteText {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.days {
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.costs {
+	margin: 0 0 8px 20px;
+
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	justify-content: flex-end;
+
+	@include breakpoint(medium) {
+		margin-bottom: 0;
+		flex-direction: row;
+	}
+}
+
+.extraCost {
+	font-size: 20px;
+	font-weight: normal;
+
+	@include breakpoint(medium) {
+		margin: 0;
+		width: 100%;
+	}
+}
+
+.totalCost {
+	width: 180px;
+	font-size: 20px;
+	font-weight: bold;
+
+	@include breakpoint(medium) {
+		width: 100%;
+		margin: 0 85px;
+	}
+}
+
+.buttons {
+	width: 180px;
+	opacity: 0.8;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.deleteButton {
+	margin: 0 40px;
+
+	&:hover {
+		color: #e53e3e;
 		transition: linear 200ms;
 		cursor: pointer;
 	}

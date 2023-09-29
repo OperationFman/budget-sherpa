@@ -64,13 +64,13 @@
 
 .budgetRemainingText {
 	align-self: flex-end;
-	padding-bottom: 6px;
+	padding: 0 0 6px 0;
 
 	@include breakpoint(large) {
 		flex: 1;
 		max-width: 50%;
 		margin: 0 auto;
-
+		padding: 0 0 6px 30px;
 		text-align: center;
 	}
 
