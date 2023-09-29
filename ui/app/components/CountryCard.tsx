@@ -8,9 +8,7 @@ export const CountryCard = () => {
 		<div className={styles.cardContainer}>
 			<div className={styles.cardInfoContainer}>
 				<div className={styles.titleContainer}>
-					<div className={styles.title}>
-						Democratic peoples republic of the Congo
-					</div>
+					<div className={styles.title}>Macedonia</div>
 				</div>
 				<div className={styles.commuteAndDays}>
 					<div className={styles.commute}>

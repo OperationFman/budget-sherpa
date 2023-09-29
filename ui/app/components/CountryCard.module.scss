@@ -60,7 +60,7 @@ $cardHeight: 100px;
 
 .title {
 	padding: 5px 0 0 20px;
-	max-width: 250px;
+	max-width: 220px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -87,7 +87,7 @@ $cardHeight: 100px;
 }
 
 .commute {
-	width: 180px;
+	width: 120px;
 	margin-left: 20px;
 
 	display: flex;
@@ -135,7 +135,7 @@ $cardHeight: 100px;
 }
 
 .totalCost {
-	width: 180px;
+	width: 120px;
 	font-size: 20px;
 	font-weight: bold;
 
@@ -156,7 +156,11 @@ $cardHeight: 100px;
 }
 
 .deleteButton {
-	margin: 0 40px;
+	margin: 0 20px;
+
+	@include breakpoint(medium) {
+		margin: 0 40px;
+	}
 
 	&:hover {
 		color: #e53e3e;
