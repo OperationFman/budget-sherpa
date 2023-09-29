@@ -1,0 +1,60 @@
+$defaultLightBlue: #90caf9;
+$defaultBlue: #42a5f5;
+$defaultDarkBlue: #1565c0;
+
+$defaultGreen: #66bb6a;
+$defaultPurple: #ce93d8;
+$defaultRed: #f44336;
+
+$darkGrey: #212121;
+$mediumGrey: #2e2e2e;
+$brightGrey: #9c9c9c;
+
+$white: #fff;
+$dimmerWhite: #f2f2f2;
+
+$lightBackground: #ffffff;
+$darkBackground: #13181c;
+
+$defaultShadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+
+.defaultBlueGradient {
+	background: linear-gradient(to bottom right, #3d4eb8, #1176d4);
+	background-clip: $defaultDarkBlue;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.defaultDarkBlueGradient {
+	background: linear-gradient(to bottom right, #2781e7, #90caf9);
+	background-clip: $defaultDarkBlue;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.defaultGreenGradient {
+	background: linear-gradient(to bottom right, #55a052, #3ccc3a);
+	background-clip: $defaultGreen;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.defaultLightBlue {
+	color: $defaultLightBlue;
+}
+.defaultDarkBlue {
+	color: $defaultDarkBlue;
+}
+
+.defaultGreen {
+	color: $defaultGreen;
+}
+.defaultPurple {
+	color: $defaultPurple;
+}
+.defaultRed {
+	color: $defaultRed;
+}
+
+.brightGrey {
+	color: $brightGrey;
+}
