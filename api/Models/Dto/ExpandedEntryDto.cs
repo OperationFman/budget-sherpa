@@ -14,6 +14,8 @@ namespace Entries.Models.Dto
         [Required]
         public required CountryRatesDto CountryRates { get; set; }
 
+        public required SelectedCountryRate SelectedCountryRate { get; set; }
+
         [Required]
         public required int Days { get; set; }
 

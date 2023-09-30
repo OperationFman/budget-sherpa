@@ -38,6 +38,7 @@ namespace Mappings
                     Average = countryRate.Average,
                     Luxury = countryRate.Luxury
                 },
+                SelectedCountryRate = entry.SelectedCountryRate,
                 Days = entry.Days,
                 Commute = entry.Commute,
                 CommuteCost = entry.CommuteCost,
