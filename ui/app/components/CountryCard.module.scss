@@ -52,24 +52,23 @@ $cardHeight: 100px;
 }
 
 .titleContainer {
-	width: 100%;
+	width: 300px;
 
 	font-size: 22px;
 	font-weight: bold;
+
+	@include breakpoint(medium) {
+		min-width: 300px;
+	}
 }
 
 .title {
 	padding: 5px 0 0 20px;
-	max-width: 220px;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
 
 	@include breakpoint(medium) {
-		max-width: 200px;
-	}
-
-	@include breakpoint(large) {
 		padding: 0 80px;
 
 		white-space: normal;
@@ -78,16 +77,16 @@ $cardHeight: 100px;
 	}
 }
 
-.commuteAndDays {
+.supplementalInfoContainer {
 	width: 100%;
-
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: space-between;
 }
 
 .commute {
-	width: 120px;
+	min-width: 140px;
 	margin-left: 20px;
 
 	display: flex;
@@ -96,8 +95,11 @@ $cardHeight: 100px;
 }
 
 .commuteIcon {
+	margin: 3px 5px 0 0;
+}
+
+.flightIcon {
 	transform: rotate(180deg);
-	margin-right: 5px;
 }
 
 .commuteText {
@@ -106,35 +108,22 @@ $cardHeight: 100px;
 }
 
 .days {
+	min-width: 140px;
 	font-size: 20px;
 	font-weight: normal;
 }
 
-.costs {
-	margin: 0 0 8px 20px;
-
-	display: flex;
-	flex-direction: row-reverse;
-	align-items: center;
-	justify-content: flex-end;
-
-	@include breakpoint(medium) {
-		margin-bottom: 0;
-		flex-direction: row;
-	}
+.extraCostContainer {
+	min-width: 140px;
 }
 
 .extraCost {
 	font-size: 20px;
 	font-weight: normal;
-
-	@include breakpoint(medium) {
-		margin: 0;
-		width: 100%;
-	}
 }
 
 .totalCost {
+	margin: 0 0 8px 20px;
 	width: 120px;
 	font-size: 20px;
 	font-weight: bold;

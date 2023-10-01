@@ -20,7 +20,7 @@ export type Entry = {
 	countryRates: CountryRates;
 	selectedCountryRate: SelectedCountryRate;
 	days: number;
-	commute?: Commute;
+	commute: Commute;
 	commuteCost?: number;
 	extras?: number;
 };
