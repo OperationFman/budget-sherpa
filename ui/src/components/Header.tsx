@@ -9,6 +9,8 @@ export const Header = ({
 	overviewHeadingValue: number;
 	overviewSubHeadingValue: number;
 }) => {
+	const budgetRemaining = overviewSubHeadingValue - overviewHeadingValue;
+
 	return (
 		<div className={styles.header}>
 			<div className={styles.pageContainer}>
@@ -30,7 +32,13 @@ export const Header = ({
 							<EditIcon fontSize='medium' className={styles.editButton} />
 						</div>
 					</div>
-					<div className={styles.budgetRemainingText}>$6,700 Under-Budget</div>
+					<div
+						className={`${styles.budgetRemainingText} ${
+							budgetRemaining < 0 && styles.budgetRemainingTextOver
+						}`}>
+						${formatCommaEvery3Digits(Math.abs(budgetRemaining))}{" "}
+						{budgetRemaining < 0 ? "Over" : "Under"}-Budget
+					</div>
 					<div className={styles.headerDesktopEditButton}>
 						<EditIcon fontSize='medium' className={styles.editButton} />
 					</div>

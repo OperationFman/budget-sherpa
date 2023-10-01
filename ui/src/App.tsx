@@ -3,23 +3,24 @@ import { Entry, entryTypeGuard } from "./types/Entry";
 import { Home } from "./Home";
 
 export const App = () => {
-	const [entries, setEntries] = useState([] as Entry[]);
-
-	const getAllEntries = async () => {
-		const response = await fetch("http://localhost:5165/api/entries");
-		return entryTypeGuard(await response.json());
-	};
+	const [entries, setEntries] = useState<undefined | Entry[]>();
 
 	useEffect(() => {
-		const fetchEntries = async () => {
-			const entries = await getAllEntries();
-			setEntries(entries);
+		const getAllEntries = async () => {
+			const response = await fetch("http://localhost:5165/api/entries");
+			return entryTypeGuard(await response.json());
 		};
 
-		fetchEntries();
+		getAllEntries().then((res) => {
+			setEntries(res);
+		});
 	}, []);
 
-	return <Home entries={entries} />;
+	if (entries) {
+		return <Home entries={entries} />;
+	}
+
+	return "Error Fetching API Data";
 };
 
 export default App;
