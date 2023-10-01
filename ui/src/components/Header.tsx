@@ -3,17 +3,28 @@ import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
 import styles from "./Header.module.scss";
 import { useState } from "react";
 import { FullScreenModal } from "../utility/FullScreenModal";
+import { Button, InputAdornment, TextField } from "@mui/material";
+import { AccountCircle } from "@mui/icons-material";
 
 export const Header = ({
 	overviewHeadingValue,
 }: {
 	overviewHeadingValue: number;
 }) => {
+	const existingBudget = Number(localStorage.getItem("budget"));
 	const [openModal, setModalOpen] = useState(false);
+	const [budget, setBudget] = useState(existingBudget || 15000);
 
-	const overviewSubHeadingValue = 5000;
+	const handleChange = (event: any) => {
+		const value = event.target.value;
 
-	const budgetRemaining = overviewSubHeadingValue - overviewHeadingValue;
+		if (value > 0) {
+			localStorage.setItem("budget", value);
+			setBudget(value);
+		}
+	};
+
+	const budgetRemaining = budget - overviewHeadingValue;
 
 	return (
 		<div className={styles.header}>
@@ -28,7 +39,7 @@ export const Header = ({
 							</span>
 							<span className={styles.overviewSlash}>/</span>
 							<span className={styles.overviewSubheading}>
-								$ {formatCommaEvery3Digits(overviewSubHeadingValue)}
+								$ {formatCommaEvery3Digits(budget)}
 							</span>
 						</div>
 
@@ -55,11 +66,28 @@ export const Header = ({
 						/>
 					</div>
 					<FullScreenModal open={openModal} setModalOpen={setModalOpen}>
-						<h1>Hello World</h1>
-						<h3>
-							Foo bar Foo bar Foo bar Foo bar Foo bar Foo bar Foo bar Foo bar
-							Foo bar{" "}
-						</h3>
+						<div>
+							<div className={styles.modalLabelText}>
+								Enter Your Budget For This Trip
+							</div>
+							<TextField
+								id='outlined-number'
+								type='number'
+								autoFocus
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<span className={styles.inputAdornment}>$</span>
+										</InputAdornment>
+									),
+								}}
+								className={styles.editBudget}
+								onChange={handleChange}
+								onKeyDown={(event) =>
+									event.keyCode === 13 && setModalOpen(false)
+								}
+							/>
+						</div>
 					</FullScreenModal>
 				</div>
 			</div>

@@ -121,4 +121,51 @@
 	}
 }
 
+.modalLabelText {
+	max-width: 50vw;
+	font-family: Inter, sans-serif;
+	font-size: 32px;
+	font-weight: bold;
+	font-style: italic;
+	margin: 60px 40px 40px 20px;
+}
 
+.inputAdornment {
+	font-size: 24px;
+}
+
+.editBudget {
+	background-color: white;
+	outline: none;
+	border-radius: 10px;
+	font-size: 24px;
+	width: 100%;
+
+	@include breakpoint(medium) {
+		width: 50%;
+	}
+
+	input {
+		font-size: 24px;
+	}
+
+	label {
+		font-size: 24px;
+		width: 100%;
+		color: black;
+		outline: none;
+		border: 2px solid white;
+	}
+
+	&:focus-within {
+		label {
+			color: black;
+			outline: none;
+			border: 2px solid white;
+		}
+	}
+
+	fieldset {
+		border: none;
+	}
+}
