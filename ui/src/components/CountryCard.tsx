@@ -1,15 +1,13 @@
-import styles from "./CountryCard.module.scss";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import AirplanemodeActiveRoundedIcon from "@mui/icons-material/AirplanemodeActiveRounded";
+import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 import DirectionsBoatFilledRoundedIcon from "@mui/icons-material/DirectionsBoatFilledRounded";
-import TrainRoundedIcon from "@mui/icons-material/TrainRounded";
 import DirectionsBusRoundedIcon from "@mui/icons-material/DirectionsBusRounded";
 import DirectionsCarRoundedIcon from "@mui/icons-material/DirectionsCarRounded";
 import HikingRoundedIcon from "@mui/icons-material/HikingRounded";
-import { Entry as Entry } from "../types/Entry";
-import { formatCommaEvery3Digits } from "../utility/format";
-import { getCountryRate } from "../utility/getCountryRate";
+import TrainRoundedIcon from "@mui/icons-material/TrainRounded";
+import { Entry } from "../../../ui/src/types/Entry";
+import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
+import styles from "./CountryCard.module.scss";
 
 export const CountryCard = ({
 	entry,

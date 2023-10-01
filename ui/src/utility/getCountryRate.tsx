@@ -1,4 +1,4 @@
-import { CountryRates, SelectedCountryRate } from "../types/Entry";
+import { CountryRates, SelectedCountryRate } from "../../../ui/src/types/Entry";
 
 export const getCountryRate = (
 	countryRates: CountryRates,

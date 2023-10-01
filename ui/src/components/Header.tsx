@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { formatCommaEvery3Digits } from "../utility/format";
-import styles from "./Header.module.scss";
 import EditIcon from "@mui/icons-material/Edit";
+import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
+import styles from "./Header.module.scss";
 
 export const Header = ({
 	overviewHeadingValue,

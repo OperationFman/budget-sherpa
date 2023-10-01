@@ -1,0 +1,33 @@
+@import "../src/utility/breakpoints";
+
+.body {
+	min-height: 100vh;
+	background-color: #000000;
+	background-image: url("../src/utility/background.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	color: #fcfcfc;
+	font-family: "Inter", sans-serif;
+
+	margin: -8px;
+	padding: 0;
+}
+
+.pageContainer {
+	max-width: $large-screen;
+	margin: 0 auto;
+	padding: 0 18px;
+}
+
+.addCountryCard {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.addCountryIcon {
+	font-size: 54px;
+	opacity: 0.15;
+}
