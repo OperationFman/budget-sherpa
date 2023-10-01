@@ -11,18 +11,13 @@ import { Entry as Entry } from "../types/Entry";
 import { formatCommaEvery3Digits } from "../utility/format";
 import { getCountryRate } from "../utility/getCountryRate";
 
-export const CountryCard = ({ entry }: { entry: Entry }) => {
-	const calculateTotalEntryCost = () => {
-		const countryRate = getCountryRate(
-			entry.countryRates,
-			entry.selectedCountryRate,
-		);
-
-		const extras = entry.extras ?? 0;
-
-		return formatCommaEvery3Digits(entry.days * countryRate + extras);
-	};
-
+export const CountryCard = ({
+	entry,
+	entryTotal,
+}: {
+	entry: Entry;
+	entryTotal: number;
+}) => {
 	const commuteIcon = [
 		<AirplanemodeActiveRoundedIcon className={styles.flightIcon} />,
 		<DirectionsBoatFilledRoundedIcon />,
@@ -59,7 +54,9 @@ export const CountryCard = ({ entry }: { entry: Entry }) => {
 					</div>
 				</div>
 				<div className={styles.costs}>
-					<div className={styles.totalCost}>${calculateTotalEntryCost()}</div>
+					<div className={styles.totalCost}>
+						${formatCommaEvery3Digits(entryTotal)}
+					</div>
 				</div>
 			</div>
 

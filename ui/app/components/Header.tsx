@@ -1,7 +1,15 @@
+import { useState } from "react";
+import { formatCommaEvery3Digits } from "../utility/format";
 import styles from "./Header.module.scss";
 import EditIcon from "@mui/icons-material/Edit";
 
-export const Header = () => {
+export const Header = ({
+	overviewHeadingValue,
+	overviewSubHeadingValue,
+}: {
+	overviewHeadingValue: number;
+	overviewSubHeadingValue: number;
+}) => {
 	return (
 		<div className={styles.header}>
 			<div className={styles.pageContainer}>
@@ -10,9 +18,13 @@ export const Header = () => {
 				<div className={styles.overviewContainer}>
 					<div className={styles.overviewNumbersContainer}>
 						<div>
-							<span className={styles.overviewHeading}>$ 8,300</span>
+							<span className={styles.overviewHeading}>
+								$ {formatCommaEvery3Digits(overviewHeadingValue)}
+							</span>
 							<span className={styles.overviewSlash}>/</span>
-							<span className={styles.overviewSubheading}>$ 15,000</span>
+							<span className={styles.overviewSubheading}>
+								$ {formatCommaEvery3Digits(overviewSubHeadingValue)}
+							</span>
 						</div>
 
 						<div className={styles.headerMobileEditButton}>
