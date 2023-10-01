@@ -1,14 +1,18 @@
 import EditIcon from "@mui/icons-material/Edit";
 import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
 import styles from "./Header.module.scss";
+import { useState } from "react";
+import { FullScreenModal } from "../utility/FullScreenModal";
 
 export const Header = ({
 	overviewHeadingValue,
-	overviewSubHeadingValue,
 }: {
 	overviewHeadingValue: number;
-	overviewSubHeadingValue: number;
 }) => {
+	const [openModal, setModalOpen] = useState(false);
+
+	const overviewSubHeadingValue = 5000;
+
 	const budgetRemaining = overviewSubHeadingValue - overviewHeadingValue;
 
 	return (
@@ -29,7 +33,11 @@ export const Header = ({
 						</div>
 
 						<div className={styles.headerMobileEditButton}>
-							<EditIcon fontSize='medium' className={styles.editButton} />
+							<EditIcon
+								fontSize='medium'
+								className={styles.editButton}
+								onClick={() => setModalOpen(true)}
+							/>
 						</div>
 					</div>
 					<div
@@ -40,8 +48,19 @@ export const Header = ({
 						{budgetRemaining < 0 ? "Over" : "Under"}-Budget
 					</div>
 					<div className={styles.headerDesktopEditButton}>
-						<EditIcon fontSize='medium' className={styles.editButton} />
+						<EditIcon
+							fontSize='medium'
+							className={styles.editButton}
+							onClick={() => setModalOpen(true)}
+						/>
 					</div>
+					<FullScreenModal open={openModal} setModalOpen={setModalOpen}>
+						<h1>Hello World</h1>
+						<h3>
+							Foo bar Foo bar Foo bar Foo bar Foo bar Foo bar Foo bar Foo bar
+							Foo bar{" "}
+						</h3>
+					</FullScreenModal>
 				</div>
 			</div>
 		</div>

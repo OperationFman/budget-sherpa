@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Entry, entryTypeGuard } from "./types/Entry";
-import { Home } from "./Home";
+import { Home } from "./HomePage";
 
 export const App = () => {
 	const [entries, setEntries] = useState<undefined | Entry[]>();
@@ -20,7 +20,7 @@ export const App = () => {
 		return <Home entries={entries} />;
 	}
 
-	return "Error Fetching API Data";
+	return <>Error Fetching API Data</>;
 };
 
 export default App;
