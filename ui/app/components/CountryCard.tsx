@@ -63,13 +63,7 @@ export const CountryCard = ({ entry }: { entry: Entry }) => {
 				</div>
 			</div>
 
-			<div className={styles.buttons}>
-				<EditIcon fontSize='large' />
-				<DeleteOutlineRoundedIcon
-					fontSize='large'
-					className={styles.deleteButton}
-				/>
-			</div>
+			<DeleteOutlineRoundedIcon className={styles.deleteButton} />
 		</div>
 	);
 };
