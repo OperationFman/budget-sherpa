@@ -22,7 +22,8 @@ export const Home = ({ entries }: { entries: Entry[] }) => {
 			);
 
 			const extras = entry.extras ?? 0;
-			const entryTotal = entry.days * countryRate + extras;
+			const commuteCose = entry.commuteCost ?? 0;
+			const entryTotal = commuteCose + entry.days * countryRate + extras;
 
 			calcOverviewTotal += entryTotal;
 
