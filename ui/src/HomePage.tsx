@@ -49,7 +49,7 @@ export const Home = ({ entries }: { entries: Entry[] }) => {
 					/>
 				</div>
 				<FullScreenModal open={openModal} setModalOpen={setModalOpen}>
-					<CountryEdit />
+					<CountryEdit setModalOpen={setModalOpen}/>
 				</FullScreenModal>
 			</div>
 		</div>

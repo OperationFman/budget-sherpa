@@ -7,8 +7,13 @@ import CardTravelRoundedIcon from "@mui/icons-material/CardTravelRounded";
 import TransferWithinAStationRoundedIcon from "@mui/icons-material/TransferWithinAStationRounded";
 import AirplaneTicketRoundedIcon from "@mui/icons-material/AirplaneTicketRounded";
 import { useEffect, useState } from "react";
+import { EntryDto } from "../types/Entry";
 
-export const CountryEdit = () => {
+export const CountryEdit = ({
+	setModalOpen,
+}: {
+	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
 	const [countries, setCountries] = useState<undefined | string[]>();
 
 	useEffect(() => {
@@ -53,15 +58,30 @@ export const CountryEdit = () => {
 	};
 
 	const handleSubmit = () => {
-		console.log(
-			{ entryId },
-			{ formCountry },
-			{ formDays },
-			{ formTravelStyle },
-			{ formCommuteCost },
-			{ formCommuteMethod },
-			{ formExtraExpenses },
-		);
+		if (formIsValid()) {
+			const newEntry: EntryDto = {
+				Id: entryId,
+				Country: formCountry,
+				Days: formDays as number,
+				SelectedCountryRate: travelStyles.indexOf(formTravelStyle),
+				CommuteCost: formCommuteCost,
+				Commute: travelMethods.indexOf(formCommuteMethod),
+				Extras: formExtraExpenses,
+			};
+
+			const options = {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(newEntry),
+			};
+			fetch("http://localhost:5165/api/entries/", options)
+				.then((response) => response.json())
+				.then((data) => console.log(data))
+				.catch((error) => console.error(error));
+		}
+		setModalOpen(false);
 	};
 
 	if (!countries) {

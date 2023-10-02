@@ -25,6 +25,16 @@ export type Entry = {
 	extras?: number;
 };
 
+export type EntryDto = {
+	Id: number;
+	Country: string;
+	SelectedCountryRate: SelectedCountryRate;
+	Days: number;
+	Commute: Commute;
+	CommuteCost?: number;
+	Extras?: number;
+};
+
 export type CountryRates = {
 	backpacker: number;
 	average: number;
