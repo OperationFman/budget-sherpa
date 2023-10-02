@@ -32,16 +32,15 @@ export const CountryCard = ({
 					<div className={styles.title}>{entry.country}</div>
 				</div>
 				<div className={styles.supplementalInfoContainer}>
-					{entry.commuteCost && (
-						<div className={styles.commute}>
-							<div className={styles.commuteIcon}>
-								{commuteIcon[entry.commute]}
-							</div>
-							<div className={styles.commuteText}>
-								${formatCommaEvery3Digits(entry.commuteCost)}
-							</div>
+					<div className={styles.commute}>
+						<div className={styles.commuteIcon}>
+							{commuteIcon[entry.commute]}
 						</div>
-					)}
+						<div className={styles.commuteText}>
+							${formatCommaEvery3Digits(entry.commuteCost ?? 0)}
+						</div>
+					</div>
+
 					<div className={styles.days}>{entry.days} Days</div>
 					<div className={styles.extraCostContainer}>
 						{entry.extras !== null &&

@@ -16,14 +16,11 @@ export const Home = ({ entries }: { entries: Entry[] }) => {
 
 	const generateCards = () => {
 		return entries.map((entry, index) => {
-			const countryRate = getCountryRate(
-				entry.countryRates,
-				entry.selectedCountryRate,
-			);
-
-			const extras = entry.extras ?? 0;
-			const commuteCose = entry.commuteCost ?? 0;
-			const entryTotal = commuteCose + entry.days * countryRate + extras;
+			const entryTotal =
+				entry.days *
+					getCountryRate(entry.countryRates, entry.selectedCountryRate) +
+				(entry.commuteCost ?? 0) +
+				(entry.extras ?? 0);
 
 			calcOverviewTotal += entryTotal;
 
