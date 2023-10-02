@@ -7,9 +7,11 @@ import * as React from "react";
 const style = {
 	backdrop: {
 		backdropFilter: "blur(12px)",
+		fontFamily: "Inter, sans-serif",
 	},
 	box: {
 		color: "#ECECEC",
+		overflow: "scroll",
 		position: "absolute" as "absolute",
 		top: "50%",
 		left: "50%",

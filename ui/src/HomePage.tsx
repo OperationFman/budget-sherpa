@@ -8,9 +8,12 @@ import styles from "./HomePage.module.scss";
 import cardStyle from "./components/CountryCard.module.scss";
 
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import { FullScreenModal } from "./utility/FullScreenModal";
+import { CountryEdit } from "./components/CountryEdit";
 
 export const Home = ({ entries }: { entries: Entry[] }) => {
 	const [overviewHeadingValue, setOverviewHeadingValue] = useState(0);
+	const [openModal, setModalOpen] = useState(false);
 
 	let calcOverviewTotal = 0;
 
@@ -37,12 +40,17 @@ export const Home = ({ entries }: { entries: Entry[] }) => {
 			<Header overviewHeadingValue={overviewHeadingValue} />
 			<div className={styles.pageContainer}>
 				{entries && generateCards()}
-				<div className={`${cardStyle.cardContainer} ${styles.addCountryCard}`}>
+				<div
+					className={`${cardStyle.cardContainer} ${styles.addCountryCard}`}
+					onClick={() => setModalOpen(true)}>
 					<AddCircleOutlineRoundedIcon
 						fontSize='large'
 						className={styles.addCountryIcon}
 					/>
 				</div>
+				<FullScreenModal open={openModal} setModalOpen={setModalOpen}>
+					<CountryEdit />
+				</FullScreenModal>
 			</div>
 		</div>
 	);

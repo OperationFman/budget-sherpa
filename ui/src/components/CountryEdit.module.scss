@@ -1,0 +1,82 @@
+@import "../utility/breakpoints";
+
+.editItem {
+	padding: 20px;
+}
+
+.container {
+	@include breakpoint(medium) {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		width: 100%;
+	}
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	flex: 1;
+}
+
+.heading {
+	max-width: 50vw;
+	font-size: 32px;
+	font-weight: bold;
+	font-style: italic;
+	margin: 60px 40px 0 20px;
+}
+
+.labelText {
+	font-size: 24px;
+	font-weight: bold;
+	font-style: italic;
+	margin: 30px 20px 10px 10px;
+}
+
+.labelSubText {
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	opacity: 0.7;
+	margin: 0 20px 12px 12px;
+}
+
+.inputAdornment {
+	font-size: 16px;
+	padding: 5px 10px 0 0;
+}
+
+.numberTextField {
+	background-color: white;
+	outline: none;
+	border-radius: 10px;
+	font-size: 16px;
+	width: 100%;
+
+	input {
+		font-size: 16px;
+	}
+
+	label {
+		font-size: 16px;
+		color: black;
+	}
+
+	&:focus-within {
+		label {
+			color: black;
+		}
+	}
+
+	fieldset {
+		border: none;
+	}
+}
+
+.save {
+	max-width: 100px;
+	margin: 50px 22px;
+	padding: 10px 60px;
+}

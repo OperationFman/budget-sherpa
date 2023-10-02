@@ -1,10 +1,9 @@
 import EditIcon from "@mui/icons-material/Edit";
-import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
-import styles from "./Header.module.scss";
+import { InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
+import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
 import { FullScreenModal } from "../utility/FullScreenModal";
-import { Button, InputAdornment, TextField } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import styles from "./Header.module.scss";
 
 export const Header = ({
 	overviewHeadingValue,
