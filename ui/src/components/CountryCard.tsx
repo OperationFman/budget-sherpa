@@ -16,9 +16,11 @@ import { CountryEdit } from "./CountryEdit";
 export const CountryCard = ({
 	entry,
 	entryTotal,
+	dailyRate,
 }: {
 	entry: Entry;
 	entryTotal: number;
+	dailyRate: number;
 }) => {
 	const store = useContext(EntriesContext);
 	const [deletingElement, setDeletingElement] = useState(false);
@@ -32,10 +34,6 @@ export const CountryCard = ({
 		<DirectionsCarRoundedIcon />,
 		<HikingRoundedIcon />,
 	];
-
-	useEffect(() => {
-		console.log("useEffect Modal State: ", foo);
-	}, [foo]);
 
 	const handleDelete = () => {
 		fetch(`http://localhost:5165/api/entries/id?id=${entry.id}`, {
@@ -70,11 +68,13 @@ export const CountryCard = ({
 
 						<div className={styles.days}>{entry.days} Days</div>
 						<div className={styles.extraCostContainer}>
-							{entry.extras !== null &&
-								entry.extras !== undefined &&
-								entry.extras !== 0 && (
-									<div className={styles.extraCost}>+${entry.extras}</div>
-								)}
+							<div className={styles.extraCost}>
+								<span className={styles.dailyCost}>${dailyRate}</span>
+								<span>/day </span>
+								{entry.extras !== null &&
+									entry.extras !== undefined &&
+									entry.extras !== 0 && <span> + ${entry.extras}</span>}
+							</div>
 						</div>
 					</div>
 					<div className={styles.costs}>
@@ -84,7 +84,6 @@ export const CountryCard = ({
 					</div>
 				</div>
 			</div>
-
 			<DeleteOutlineRoundedIcon
 				className={styles.deleteButton}
 				onClick={handleDelete}

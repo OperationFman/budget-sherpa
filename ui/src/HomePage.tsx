@@ -19,15 +19,16 @@ export const HomePage = ({ entries }: { entries: Entry[] }) => {
 
 	const generateCards = () => {
 		return entries.map((entry, index) => {
+			const dailyRate = getCountryRate(
+				entry.countryRates,
+				entry.selectedCountryRate,
+			);
 			const entryTotal =
-				entry.days *
-					getCountryRate(entry.countryRates, entry.selectedCountryRate) +
-				(entry.commuteCost ?? 0) +
-				(entry.extras ?? 0);
+				entry.days * dailyRate + (entry.commuteCost ?? 0) + (entry.extras ?? 0);
 
 			calcOverviewTotal += entryTotal;
 
-			return <CountryCard entry={entry} entryTotal={entryTotal} key={index} />;
+			return <CountryCard entry={entry} entryTotal={entryTotal} dailyRate={dailyRate} key={index} />;
 		});
 	};
 
@@ -41,7 +42,7 @@ export const HomePage = ({ entries }: { entries: Entry[] }) => {
 			<div className={styles.pageContainer}>
 				{entries && generateCards()}
 				<div
-					className={`${cardStyle.cardContainer} ${styles.addCountryCard}`}
+					className={`${cardStyle.cardContainer} ${cardStyle.clickArea} ${styles.addCountryCard}`}
 					onClick={() => setModalOpen(true)}>
 					<AddCircleOutlineRoundedIcon
 						fontSize='large'
