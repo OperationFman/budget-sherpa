@@ -1,23 +1,12 @@
-import { useEffect, useState } from "react";
-import { Entry, entryTypeGuard } from "./types/Entry";
+import { useContext } from "react";
 import { Home } from "./HomePage";
+import { EntriesContext } from "./components/providers/EntriesProvider";
 
 export const App = () => {
-	const [entries, setEntries] = useState<undefined | Entry[]>();
+	const store = useContext(EntriesContext);
 
-	useEffect(() => {
-		const getAllEntries = async () => {
-			const response = await fetch("http://localhost:5165/api/entries");
-			return entryTypeGuard(await response.json());
-		};
-
-		getAllEntries().then((res) => {
-			setEntries(res);
-		});
-	}, []);
-
-	if (entries) {
-		return <Home entries={entries} />;
+	if (store.entries) {
+		return <Home entries={store.entries} />;
 	}
 
 	return <>Error Fetching API Data</>;

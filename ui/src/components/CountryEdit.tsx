@@ -6,14 +6,17 @@ import TodayRoundedIcon from "@mui/icons-material/TodayRounded";
 import CardTravelRoundedIcon from "@mui/icons-material/CardTravelRounded";
 import TransferWithinAStationRoundedIcon from "@mui/icons-material/TransferWithinAStationRounded";
 import AirplaneTicketRoundedIcon from "@mui/icons-material/AirplaneTicketRounded";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { EntryDto } from "../types/Entry";
+import { EntriesContext } from "./providers/EntriesProvider";
 
 export const CountryEdit = ({
 	setModalOpen,
 }: {
 	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+	const store = useContext(EntriesContext);
+
 	const [countries, setCountries] = useState<undefined | string[]>();
 
 	useEffect(() => {
@@ -77,10 +80,9 @@ export const CountryEdit = ({
 				body: JSON.stringify(newEntry),
 			};
 			fetch("http://localhost:5165/api/entries/", options)
-				.then((response) => response.json())
-				.then((data) => console.log(data))
 				.catch((error) => console.error(error));
 		}
+		store.setIsLoading(true);
 		setModalOpen(false);
 	};
 
