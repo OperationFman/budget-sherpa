@@ -4,14 +4,12 @@ import { Entry, entryTypeGuard } from "../../types/Entry";
 type ContextType = {
 	entries: undefined | Entry[];
 	isLoading: boolean;
-	// refreshData: () => Promise<void>;
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const EntriesContext = createContext<ContextType>({
 	entries: undefined,
 	isLoading: true,
-	// refreshData: () => Promise.resolve(),
 	setIsLoading: () => {},
 });
 
@@ -24,8 +22,6 @@ export const EntriesProvider = ({ children }: { children: JSX.Element }) => {
 		const validatedResponse = entryTypeGuard(await response.json());
 
 		setEntries(validatedResponse);
-
-		return Promise.resolve();
 	};
 
 	useEffect(() => {

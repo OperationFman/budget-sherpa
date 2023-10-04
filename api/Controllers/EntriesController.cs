@@ -144,7 +144,9 @@ namespace Entries.Controller
             _context.Entry.Remove(entity: entry);
             _context.SaveChanges();
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "http://localhost:3000");
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+            HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
             return NoContent();
         }
 

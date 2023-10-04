@@ -8,6 +8,8 @@ import TrainRoundedIcon from "@mui/icons-material/TrainRounded";
 import { Entry } from "../../../ui/src/types/Entry";
 import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
 import styles from "./CountryCard.module.scss";
+import { useContext, useEffect } from "react";
+import { EntriesContext } from "./providers/EntriesProvider";
 
 export const CountryCard = ({
 	entry,
@@ -16,6 +18,8 @@ export const CountryCard = ({
 	entry: Entry;
 	entryTotal: number;
 }) => {
+	const store = useContext(EntriesContext);
+
 	const commuteIcon = [
 		<AirplanemodeActiveRoundedIcon className={styles.flightIcon} />,
 		<DirectionsBoatFilledRoundedIcon />,
@@ -24,6 +28,14 @@ export const CountryCard = ({
 		<DirectionsCarRoundedIcon />,
 		<HikingRoundedIcon />,
 	];
+
+	const handleDelete = () => {
+		fetch(`http://localhost:5165/api/entries/id?id=${entry.id}`, {
+			method: "DELETE",
+		}).then(() => {
+			store.setIsLoading(true);
+		});
+	};
 
 	return (
 		<div className={styles.cardContainer}>
@@ -57,7 +69,10 @@ export const CountryCard = ({
 				</div>
 			</div>
 
-			<DeleteOutlineRoundedIcon className={styles.deleteButton} />
+			<DeleteOutlineRoundedIcon
+				className={styles.deleteButton}
+				onClick={handleDelete}
+			/>
 		</div>
 	);
 };

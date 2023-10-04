@@ -11,7 +11,7 @@ import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRou
 import { FullScreenModal } from "./utility/FullScreenModal";
 import { CountryEdit } from "./components/CountryEdit";
 
-export const Home = ({ entries }: { entries: Entry[] }) => {
+export const HomePage = ({ entries }: { entries: Entry[] }) => {
 	const [overviewHeadingValue, setOverviewHeadingValue] = useState(0);
 	const [openModal, setModalOpen] = useState(false);
 
@@ -49,7 +49,7 @@ export const Home = ({ entries }: { entries: Entry[] }) => {
 					/>
 				</div>
 				<FullScreenModal open={openModal} setModalOpen={setModalOpen}>
-					<CountryEdit setModalOpen={setModalOpen}/>
+					<CountryEdit setModalOpen={setModalOpen} />
 				</FullScreenModal>
 			</div>
 		</div>
