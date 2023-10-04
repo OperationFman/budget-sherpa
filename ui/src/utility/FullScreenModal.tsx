@@ -44,7 +44,9 @@ export const FullScreenModal = ({
 	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	children: React.ReactNode;
 }) => {
-	const handleClose = () => setModalOpen(false);
+	const handleClose = () => {
+		setModalOpen(false);
+	};
 
 	return (
 		<div>
@@ -54,7 +56,6 @@ export const FullScreenModal = ({
 				open={open}
 				onClose={handleClose}
 				closeAfterTransition
-				// slots={{ backdrop: Backdrop }}
 				slotProps={{
 					backdrop: {
 						timeout: 500,

@@ -7,13 +7,15 @@ import CardTravelRoundedIcon from "@mui/icons-material/CardTravelRounded";
 import TransferWithinAStationRoundedIcon from "@mui/icons-material/TransferWithinAStationRounded";
 import AirplaneTicketRoundedIcon from "@mui/icons-material/AirplaneTicketRounded";
 import { useContext, useEffect, useState } from "react";
-import { EntryDto } from "../types/Entry";
+import { Entry, EntryDto } from "../types/Entry";
 import { EntriesContext } from "./providers/EntriesProvider";
 
 export const CountryEdit = ({
 	setModalOpen,
+	entry: entry,
 }: {
 	setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	entry?: Entry;
 }) => {
 	const store = useContext(EntriesContext);
 
@@ -32,20 +34,25 @@ export const CountryEdit = ({
 		});
 	}, []);
 
-	const [entryId, setEntryId] = useState(0);
-	const [formCountry, setFormCountry] = useState("Australia");
-	const [formDays, setFormDays] = useState<undefined | number>(undefined);
-	const [formTravelStyle, setFormTravelStyle] = useState("Backpacking");
-	const [formCommuteCost, setFormCommuteCost] = useState<undefined | number>(
-		undefined,
-	);
-	const [formCommuteMethod, setFormCommuteMethod] = useState("Flight");
-	const [formExtraExpenses, setFormExtraExpenses] = useState<
-		undefined | number
-	>(undefined);
-
 	const travelStyles = ["Freeload", "Backpacking", "Average", "Luxury"];
 	const travelMethods = ["Flight", "Ferry", "Train", "Bus", "Car", "Foot"];
+
+	const [formCountry, setFormCountry] = useState(entry?.country || "Australia");
+	const [formDays, setFormDays] = useState<undefined | number>(entry?.days);
+	const [formTravelStyle, setFormTravelStyle] = useState(
+		entry?.selectedCountryRate
+			? travelStyles[entry.selectedCountryRate]
+			: "Backpacking",
+	);
+	const [formCommuteCost, setFormCommuteCost] = useState<undefined | number>(
+		entry?.commuteCost || undefined,
+	);
+	const [formCommuteMethod, setFormCommuteMethod] = useState(
+		entry?.commute ? travelMethods[entry.commute] : "Flight",
+	);
+	const [formExtraExpenses, setFormExtraExpenses] = useState<
+		undefined | number
+	>(entry?.extras || undefined);
 
 	const formIsValid = () => {
 		return (
@@ -62,8 +69,8 @@ export const CountryEdit = ({
 
 	const handleSubmit = () => {
 		if (formIsValid()) {
-			const newEntry: EntryDto = {
-				Id: entryId,
+			const finalEntry: EntryDto = {
+				Id: entry?.id || 0,
 				Country: formCountry,
 				Days: formDays as number,
 				SelectedCountryRate: travelStyles.indexOf(formTravelStyle),
@@ -73,16 +80,17 @@ export const CountryEdit = ({
 			};
 
 			const options = {
-				method: "POST",
+				method: finalEntry.Id === 0 ? "POST" : "PUT",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(newEntry),
+				body: JSON.stringify(finalEntry),
 			};
 			fetch("http://localhost:5165/api/entries/", options).catch((error) =>
 				console.error(error),
 			);
 		}
+
 		store.setIsLoading(true);
 		setModalOpen(false);
 	};

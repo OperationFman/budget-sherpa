@@ -10,6 +10,8 @@ import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
 import styles from "./CountryCard.module.scss";
 import { useContext, useEffect, useState } from "react";
 import { EntriesContext } from "./providers/EntriesProvider";
+import { FullScreenModal } from "../utility/FullScreenModal";
+import { CountryEdit } from "./CountryEdit";
 
 export const CountryCard = ({
 	entry,
@@ -20,6 +22,7 @@ export const CountryCard = ({
 }) => {
 	const store = useContext(EntriesContext);
 	const [deletingElement, setDeletingElement] = useState(false);
+	const [foo, setFoo] = useState(false);
 
 	const commuteIcon = [
 		<AirplanemodeActiveRoundedIcon className={styles.flightIcon} />,
@@ -29,6 +32,10 @@ export const CountryCard = ({
 		<DirectionsCarRoundedIcon />,
 		<HikingRoundedIcon />,
 	];
+
+	useEffect(() => {
+		console.log("useEffect Modal State: ", foo);
+	}, [foo]);
 
 	const handleDelete = () => {
 		fetch(`http://localhost:5165/api/entries/id?id=${entry.id}`, {
@@ -46,32 +53,34 @@ export const CountryCard = ({
 			className={`${styles.cardContainer} ${
 				deletingElement && styles.deleting
 			}`}>
-			<div className={styles.cardInfoContainer}>
-				<div className={styles.titleContainer}>
-					<div className={styles.title}>{entry.country}</div>
-				</div>
-				<div className={styles.supplementalInfoContainer}>
-					<div className={styles.commute}>
-						<div className={styles.commuteIcon}>
-							{commuteIcon[entry.commute]}
-						</div>
-						<div className={styles.commuteText}>
-							${formatCommaEvery3Digits(entry.commuteCost ?? 0)}
-						</div>
+			<div className={styles.clickArea} onClick={() => setFoo(true)}>
+				<div className={styles.cardInfoContainer}>
+					<div className={styles.titleContainer}>
+						<div className={styles.title}>{entry.country}</div>
 					</div>
+					<div className={styles.supplementalInfoContainer}>
+						<div className={styles.commute}>
+							<div className={styles.commuteIcon}>
+								{commuteIcon[entry.commute]}
+							</div>
+							<div className={styles.commuteText}>
+								${formatCommaEvery3Digits(entry.commuteCost ?? 0)}
+							</div>
+						</div>
 
-					<div className={styles.days}>{entry.days} Days</div>
-					<div className={styles.extraCostContainer}>
-						{entry.extras !== null &&
-							entry.extras !== undefined &&
-							entry.extras !== 0 && (
-								<div className={styles.extraCost}>+${entry.extras}</div>
-							)}
+						<div className={styles.days}>{entry.days} Days</div>
+						<div className={styles.extraCostContainer}>
+							{entry.extras !== null &&
+								entry.extras !== undefined &&
+								entry.extras !== 0 && (
+									<div className={styles.extraCost}>+${entry.extras}</div>
+								)}
+						</div>
 					</div>
-				</div>
-				<div className={styles.costs}>
-					<div className={styles.totalCost}>
-						${formatCommaEvery3Digits(entryTotal)}
+					<div className={styles.costs}>
+						<div className={styles.totalCost}>
+							${formatCommaEvery3Digits(entryTotal)}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -80,6 +89,10 @@ export const CountryCard = ({
 				className={styles.deleteButton}
 				onClick={handleDelete}
 			/>
+
+			<FullScreenModal open={foo} setModalOpen={setFoo}>
+				<CountryEdit setModalOpen={setFoo} entry={entry} />
+			</FullScreenModal>
 		</div>
 	);
 };
