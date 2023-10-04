@@ -8,7 +8,7 @@ import TrainRoundedIcon from "@mui/icons-material/TrainRounded";
 import { Entry } from "../../../ui/src/types/Entry";
 import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
 import styles from "./CountryCard.module.scss";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { EntriesContext } from "./providers/EntriesProvider";
 
 export const CountryCard = ({
@@ -19,6 +19,7 @@ export const CountryCard = ({
 	entryTotal: number;
 }) => {
 	const store = useContext(EntriesContext);
+	const [deletingElement, setDeletingElement] = useState(false);
 
 	const commuteIcon = [
 		<AirplanemodeActiveRoundedIcon className={styles.flightIcon} />,
@@ -33,12 +34,18 @@ export const CountryCard = ({
 		fetch(`http://localhost:5165/api/entries/id?id=${entry.id}`, {
 			method: "DELETE",
 		}).then(() => {
-			store.setIsLoading(true);
+			setDeletingElement(true);
+			setTimeout(() => {
+				store.setIsLoading(true);
+			}, 200);
 		});
 	};
 
 	return (
-		<div className={styles.cardContainer}>
+		<div
+			className={`${styles.cardContainer} ${
+				deletingElement && styles.deleting
+			}`}>
 			<div className={styles.cardInfoContainer}>
 				<div className={styles.titleContainer}>
 					<div className={styles.title}>{entry.country}</div>

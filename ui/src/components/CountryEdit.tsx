@@ -79,8 +79,9 @@ export const CountryEdit = ({
 				},
 				body: JSON.stringify(newEntry),
 			};
-			fetch("http://localhost:5165/api/entries/", options)
-				.catch((error) => console.error(error));
+			fetch("http://localhost:5165/api/entries/", options).catch((error) =>
+				console.error(error),
+			);
 		}
 		store.setIsLoading(true);
 		setModalOpen(false);
@@ -273,15 +274,16 @@ export const CountryEdit = ({
 					</div>
 				</div>
 			</div>
-			<Button
-				className={styles.save}
-				variant='contained'
-				color='success'
-				disabled={!formIsValid()}
-				onClick={handleSubmit}
-				endIcon={<SaveIcon />}>
-				Save
-			</Button>
+			<div className={styles.save}>
+				<Button
+					variant='contained'
+					color='success'
+					disabled={!formIsValid()}
+					onClick={handleSubmit}
+					endIcon={<SaveIcon />}>
+					Save
+				</Button>
+			</div>
 		</div>
 	);
 };
