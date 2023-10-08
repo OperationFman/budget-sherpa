@@ -1,7 +1,15 @@
-FROM mcr.microsoft.com/dotnet/runtime:7.0
+FROM mcr.microsoft.com/dotnet/core/sdk:7.0 AS build-env
 
-COPY . /api
-
+COPY *.csproj ./
 RUN dotnet restore
 
-ENTRYPOINT ["dotnet", "run"]
+COPY . ./
+
+RUN dotnet publish -c Release -o out
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:7.0
+
+EXPOSE 5165
+COPY --from=build-env /api/out .
+
+ENTRYPOINT ["dotnet", "run", "api.dll"]

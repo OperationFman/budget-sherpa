@@ -67,3 +67,8 @@
 /Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/runtimes/win-arm64/native/e_sqlite3.dll
 /Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/runtimes/win-x64/native/e_sqlite3.dll
 /Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/runtimes/win-x86/native/e_sqlite3.dll
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/out/web.config
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/out/api.deps.json
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/out/api.runtimeconfig.json
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/out/appsettings.Development.json
+/Users/franklinmoon/Documents/Github/budget-sherpa/api/bin/Debug/net7.0/out/appsettings.json
