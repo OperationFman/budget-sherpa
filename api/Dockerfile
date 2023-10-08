@@ -7,7 +7,7 @@ COPY . ./
 
 RUN dotnet publish -c Release -o out
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 
 EXPOSE 5165
 COPY --from=build-env /api/out .
