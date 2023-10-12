@@ -28,7 +28,14 @@ export const HomePage = ({ entries }: { entries: Entry[] }) => {
 
 			calcOverviewTotal += entryTotal;
 
-			return <CountryCard entry={entry} entryTotal={entryTotal} dailyRate={dailyRate} key={index} />;
+			return (
+				<CountryCard
+					entry={entry}
+					entryTotal={entryTotal}
+					dailyRate={dailyRate}
+					key={index}
+				/>
+			);
 		});
 	};
 

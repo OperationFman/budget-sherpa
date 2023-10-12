@@ -30,3 +30,29 @@
 .addCountryIcon {
 	opacity: 0.15;
 }
+
+@keyframes breathing {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.3;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.errorText {
+	font-size: 36px;
+	font-weight: bold;
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	animation: breathing 3s infinite;
+}

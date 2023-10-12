@@ -87,7 +87,7 @@ export const CountryEdit = ({
 				body: JSON.stringify(finalEntry),
 			};
 			fetch("http://localhost:5165/api/entries/", options).catch((error) =>
-				console.error(error),
+				console.log(error),
 			);
 		}
 

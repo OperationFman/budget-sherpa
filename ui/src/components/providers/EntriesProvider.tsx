@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Entry, entryTypeGuard } from "../../types/Entry";
+import { ErrorContext, ErrorProvider } from "./ErrorProvider";
 
 type ContextType = {
 	entries: undefined | Entry[];
@@ -14,14 +15,30 @@ export const EntriesContext = createContext<ContextType>({
 });
 
 export const EntriesProvider = ({ children }: { children: JSX.Element }) => {
+	const error = useContext(ErrorContext);
+
 	const [entries, setEntries] = useState<undefined | Entry[]>();
 	const [isLoading, setIsLoading] = useState(true);
 
 	const refreshData = async () => {
-		const response = await fetch("http://localhost:5165/api/entries");
-		const validatedResponse = entryTypeGuard(await response.json());
+		// TODO: Automatic refresh
 
-		setEntries(validatedResponse);
+		try {
+			const response = await fetch("http://localhost:5165/api/entries");
+
+			if (response.status !== 200) {
+				error.setMessage("Server responded with something unexpected");
+				throw `Status code: ${response.status}, (Should be 200)`;
+			}
+
+			const validatedResponse = entryTypeGuard(await response.json());
+
+			setEntries(validatedResponse);
+		} catch {
+			error.setMessage("Can't access the server");
+
+			setEntries(undefined);
+		}
 	};
 
 	useEffect(() => {
