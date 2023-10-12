@@ -20,7 +20,7 @@ export const App = () => {
 	if (error.message) {
 		return (
 			<div className={styles.body}>
-				<div className={styles.errorText}>Uh oh!</div>
+				<div className={styles.errorText}>Retrying...</div>
 			</div>
 		);
 	}

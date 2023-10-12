@@ -41,11 +41,11 @@ export type CountryRates = {
 	luxury: number;
 };
 
-export const entryTypeGuard = (expandedEntryDto: any): Entry[] => {
+export const entryTypeGuard = (expandedEntryDto: any): Entry[] | false => {
 	return expandedEntryDto.id !== undefined &&
 		expandedEntryDto.country !== undefined &&
 		expandedEntryDto.countryRates !== undefined &&
 		expandedEntryDto.days !== undefined
-		? undefined
+		? false
 		: expandedEntryDto;
 };

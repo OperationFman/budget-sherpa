@@ -9,6 +9,7 @@ import AirplaneTicketRoundedIcon from "@mui/icons-material/AirplaneTicketRounded
 import { useContext, useEffect, useState } from "react";
 import { Entry, EntryDto } from "../types/Entry";
 import { EntriesContext } from "./providers/EntriesProvider";
+import { ErrorContext } from "./providers/ErrorProvider";
 
 export const CountryEdit = ({
 	setModalOpen,
@@ -18,20 +19,31 @@ export const CountryEdit = ({
 	entry?: Entry;
 }) => {
 	const store = useContext(EntriesContext);
+	const error = useContext(ErrorContext);
 
 	const [countries, setCountries] = useState<undefined | string[]>();
 
 	useEffect(() => {
 		const getAllCountries = async () => {
-			const response = await fetch(
-				"http://localhost:5165/api/entries/countries",
-			);
-			return await response.json();
+			try {
+				const response = await fetch(
+					"http://localhost:5165/api/entries/countries",
+				);
+
+				if (response.status == 200) {
+					setCountries(await response.json());
+				} else {
+					error.setMessage(
+						"Something is wrong, We received a list of countries from the server with something unexpected",
+					);
+				}
+			} catch {
+				setModalOpen(false);
+				error.setMessage("Can't access the server");
+			}
 		};
 
-		getAllCountries().then((res) => {
-			setCountries(res);
-		});
+		getAllCountries();
 	}, []);
 
 	const travelStyles = ["Freeload", "Backpacking", "Average", "Luxury"];
@@ -67,6 +79,35 @@ export const CountryEdit = ({
 		);
 	};
 
+	const handleFetch = async (finalEntry: EntryDto) => {
+		try {
+			const options = {
+				method: finalEntry.Id === 0 ? "POST" : "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(finalEntry),
+			};
+
+			const response = await fetch(
+				"http://localhost:5165/api/entries/",
+				options,
+			);
+
+			if (response.status !== 200 ?? response.status !== 204) {
+				console.log(`Status code: ${response.status}, (Should be 200 or 204)`);
+				throw "";
+			}
+
+			store.setIsLoading(true);
+			setModalOpen(false);
+		} catch {
+			error.setMessage(
+				"Something is wrong, we couldn't save this entry to the server",
+			);
+		}
+	};
+
 	const handleSubmit = () => {
 		if (formIsValid()) {
 			const finalEntry: EntryDto = {
@@ -79,25 +120,18 @@ export const CountryEdit = ({
 				Extras: formExtraExpenses,
 			};
 
-			const options = {
-				method: finalEntry.Id === 0 ? "POST" : "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(finalEntry),
-			};
-			fetch("http://localhost:5165/api/entries/", options).catch((error) =>
-				console.log(error),
+			handleFetch(finalEntry);
+		} else {
+			error.setMessage(
+				"One or more items are invalid, please amend and try again",
 			);
 		}
-
-		store.setIsLoading(true);
-		setModalOpen(false);
 	};
 
 	if (!countries) {
-		return <>Could not load countries</>;
+		return <div className={styles.fetchingMessage}>Fetching Data...</div>;
 	}
+
 	return (
 		<div>
 			<div className={styles.heading}>Add New Destination</div>

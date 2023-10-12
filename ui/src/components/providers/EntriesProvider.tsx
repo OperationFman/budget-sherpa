@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Entry, entryTypeGuard } from "../../types/Entry";
-import { ErrorContext, ErrorProvider } from "./ErrorProvider";
+import { ErrorContext } from "./ErrorProvider";
 
 type ContextType = {
 	entries: undefined | Entry[];
@@ -28,15 +28,19 @@ export const EntriesProvider = ({ children }: { children: JSX.Element }) => {
 
 			if (response.status !== 200) {
 				error.setMessage("Server responded with something unexpected");
-				throw `Status code: ${response.status}, (Should be 200)`;
 			}
 
 			const validatedResponse = entryTypeGuard(await response.json());
 
+			if (!validatedResponse) {
+				error.setMessage("Server responded with something unexpected");
+				setEntries(undefined);
+				return;
+			}
+
 			setEntries(validatedResponse);
 		} catch {
 			error.setMessage("Can't access the server");
-
 			setEntries(undefined);
 		}
 	};
