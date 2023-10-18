@@ -14,4 +14,6 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS final-env
 WORKDIR /app
 COPY --from=build-env /app/out .
 COPY --from=build-env /app/database.db .
+
+ENV ASPNETCORE_URLS=http://+:80
 ENTRYPOINT ["dotnet", "api.dll"]
