@@ -1,11 +1,17 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0
-
-COPY . /app
-
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
+COPY *.csproj ./
 RUN dotnet restore
 
-EXPOSE 5165
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-CMD ["dotnet", "run"]
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS final-env
+WORKDIR /app
+COPY --from=build-env /app/out .
+COPY --from=build-env /app/database.db .
+ENTRYPOINT ["dotnet", "api.dll"]
