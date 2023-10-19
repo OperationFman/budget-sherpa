@@ -97,7 +97,7 @@ export const CountryEdit = ({
 			};
 
 			const response = await fetch(
-				"https://budget-sherpa-api.onrender.com/api/entries/",
+				"https://budget-sherpa-api.onrender.com/api/entries",
 				options,
 			);
 
