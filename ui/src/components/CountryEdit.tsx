@@ -1,4 +1,9 @@
-import { Button, InputAdornment, TextField } from "@mui/material";
+import {
+	Button,
+	CircularProgress,
+	InputAdornment,
+	TextField,
+} from "@mui/material";
 import styles from "./CountryEdit.module.scss";
 import SaveIcon from "@mui/icons-material/Save";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
@@ -22,12 +27,13 @@ export const CountryEdit = ({
 	const error = useContext(ErrorContext);
 
 	const [countries, setCountries] = useState<undefined | string[]>();
+	const [saving, setSaving] = useState(false);
 
 	useEffect(() => {
 		const getAllCountries = async () => {
 			try {
 				const response = await fetch(
-					"http://localhost:5165/api/entries/countries",
+					"https://budget-sherpa-api.onrender.com/api/entries/countries",
 				);
 
 				if (response.status == 200) {
@@ -80,6 +86,7 @@ export const CountryEdit = ({
 	};
 
 	const handleFetch = async (finalEntry: EntryDto) => {
+		setSaving(true);
 		try {
 			const options = {
 				method: finalEntry.Id === 0 ? "POST" : "PUT",
@@ -90,7 +97,7 @@ export const CountryEdit = ({
 			};
 
 			const response = await fetch(
-				"http://localhost:5165/api/entries/",
+				"https://budget-sherpa-api.onrender.com/api/entries/",
 				options,
 			);
 
@@ -106,6 +113,7 @@ export const CountryEdit = ({
 				"Something is wrong, we couldn't save this entry to the server",
 			);
 		}
+		setSaving(false);
 	};
 
 	const handleSubmit = () => {
@@ -317,14 +325,18 @@ export const CountryEdit = ({
 				</div>
 			</div>
 			<div className={styles.save}>
-				<Button
-					variant='contained'
-					color='success'
-					disabled={!formIsValid()}
-					onClick={handleSubmit}
-					endIcon={<SaveIcon />}>
-					Save
-				</Button>
+				{saving ? (
+					<CircularProgress color='success' />
+				) : (
+					<Button
+						variant='contained'
+						color='success'
+						disabled={!formIsValid()}
+						onClick={handleSubmit}
+						endIcon={<SaveIcon />}>
+						Save
+					</Button>
+				)}
 			</div>
 		</div>
 	);

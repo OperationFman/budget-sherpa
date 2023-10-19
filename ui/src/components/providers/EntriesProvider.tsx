@@ -24,7 +24,7 @@ export const EntriesProvider = ({ children }: { children: JSX.Element }) => {
 		// TODO: Automatic refresh
 
 		try {
-			const response = await fetch("http://localhost:5165/api/entries");
+			const response = await fetch("https://budget-sherpa-api.onrender.com/api/entries");
 
 			if (response.status !== 200) {
 				error.setMessage("Server responded with something unexpected");

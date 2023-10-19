@@ -36,13 +36,14 @@ export const CountryCard = ({
 	];
 
 	const handleDelete = () => {
-		fetch(`http://localhost:5165/api/entries/id?id=${entry.id}`, {
-			method: "DELETE",
-		}).then(() => {
+		fetch(
+			`https://budget-sherpa-api.onrender.com/api/entries/id?id=${entry.id}`,
+			{
+				method: "DELETE",
+			},
+		).then(() => {
 			setDeletingElement(true);
-			setTimeout(() => {
-				store.setIsLoading(true);
-			}, 200);
+			store.setIsLoading(true);
 		});
 	};
 
