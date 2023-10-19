@@ -9,7 +9,7 @@ builder.Services.AddCors(options =>
                       builder =>
                       {
                           builder
-                            .WithOrigins("http://localhost:3000") // specifying the allowed origin
+                            .WithOrigins("https://budget-sherpa-ui.onrender.com/") // specifying the allowed origin
                             .WithMethods("GET", "POST", "DELETE", "PUT") // defining the allowed HTTP method
                             .AllowAnyHeader(); // allowing any header to be sent
                       });
