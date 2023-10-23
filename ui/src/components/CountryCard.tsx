@@ -12,6 +12,8 @@ import { useContext, useEffect, useState } from "react";
 import { EntriesContext } from "./providers/EntriesProvider";
 import { FullScreenModal } from "../utility/FullScreenModal";
 import { CountryEdit } from "./CountryEdit";
+import { ErrorContext } from "./providers/ErrorProvider";
+import { CircularProgress } from "@mui/material";
 
 export const CountryCard = ({
 	entry,
@@ -23,8 +25,10 @@ export const CountryCard = ({
 	dailyRate: number;
 }) => {
 	const store = useContext(EntriesContext);
+	const error = useContext(ErrorContext);
 	const [deletingElement, setDeletingElement] = useState(false);
-	const [foo, setFoo] = useState(false);
+	const [modal, setModal] = useState(false);
+	const [deleting, setDeleting] = useState(false);
 
 	const commuteIcon = [
 		<AirplanemodeActiveRoundedIcon className={styles.flightIcon} />,
@@ -36,15 +40,23 @@ export const CountryCard = ({
 	];
 
 	const handleDelete = () => {
-		fetch(
-			`https://budget-sherpa-api.onrender.com/api/entries/id?id=${entry.id}`,
-			{
-				method: "DELETE",
-			},
-		).then(() => {
-			setDeletingElement(true);
-			store.setIsLoading(true);
-		});
+		setDeleting(true);
+		try {
+			fetch(
+				`https://budget-sherpa-api.onrender.com/api/entries/id?id=${entry.id}`,
+				{
+					method: "DELETE",
+				},
+			).then(() => {
+				setDeletingElement(true);
+				store.setIsLoading(true);
+			});
+		} catch {
+			error.setMessage(
+				"Something is wrong, we couldn't delete this entry from the server",
+			);
+		}
+		setDeleting(false);
 	};
 
 	return (
@@ -52,7 +64,7 @@ export const CountryCard = ({
 			className={`${styles.cardContainer} ${
 				deletingElement && styles.deleting
 			}`}>
-			<div className={styles.clickArea} onClick={() => setFoo(true)}>
+			<div className={styles.clickArea} onClick={() => setModal(true)}>
 				<div className={styles.cardInfoContainer}>
 					<div className={styles.titleContainer}>
 						<div className={styles.title}>{entry.country}</div>
@@ -85,13 +97,17 @@ export const CountryCard = ({
 					</div>
 				</div>
 			</div>
-			<DeleteOutlineRoundedIcon
-				className={styles.deleteButton}
-				onClick={handleDelete}
-			/>
+			{deleting ? (
+				<CircularProgress color='inherit' className={styles.deleteButton} />
+			) : (
+				<DeleteOutlineRoundedIcon
+					className={styles.deleteButton}
+					onClick={handleDelete}
+				/>
+			)}
 
-			<FullScreenModal open={foo} setModalOpen={setFoo}>
-				<CountryEdit setModalOpen={setFoo} entry={entry} />
+			<FullScreenModal open={modal} setModalOpen={setModal}>
+				<CountryEdit setModalOpen={setModal} entry={entry} />
 			</FullScreenModal>
 		</div>
 	);

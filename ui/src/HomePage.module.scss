@@ -45,14 +45,26 @@
 	}
 }
 
-.errorText {
-	font-size: 36px;
-	font-weight: bold;
-
+.errorContainer {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.errorText {
+	font-size: 36px;
+	font-weight: bold;
+	text-align: center;
 
 	animation: breathing 3s infinite;
+}
+
+.longWait {
+	padding-top: 20px;
+
+	font-size: 24px;
+	font-weight: regular;
+	font-style: italic;
+	text-align: center;
 }
