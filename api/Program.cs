@@ -11,6 +11,7 @@ builder.Services.AddCors(options =>
             builder
             .WithOrigins("https://budget-sherpa-ui.onrender.com")
             .AllowAnyMethod()
+            .AllowAnyOrigin()
             .AllowAnyHeader();
 
         });
