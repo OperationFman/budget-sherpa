@@ -35,7 +35,6 @@ namespace Entries.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://budget-sherpa-ui.onrender.com");
             return Ok(expandedEntries);
         }
 
@@ -44,7 +43,6 @@ namespace Entries.Controller
         {
             _logger.LogInformation("Getting all countries names");
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://budget-sherpa-ui.onrender.com");
             return Ok(_context.CountryRate.Select(e => e.Country).ToList());
         }
 
@@ -53,7 +51,6 @@ namespace Entries.Controller
         {
             _logger.LogInformation("Getting all countries and their rates");
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://budget-sherpa-ui.onrender.com");
             return Ok(_context.CountryRate.ToList());
         }
 
@@ -80,7 +77,6 @@ namespace Entries.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://budget-sherpa-ui.onrender.com");
             return Ok(expandedEntryDto);
         }
 
@@ -118,9 +114,6 @@ namespace Entries.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://budget-sherpa-ui.onrender.com");
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
             return Ok(expandedEntryDto);
 
         }
@@ -144,9 +137,6 @@ namespace Entries.Controller
             _context.Entry.Remove(entity: entry);
             _context.SaveChanges();
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://budget-sherpa-ui.onrender.com");
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
             return NoContent();
         }
 
@@ -179,7 +169,6 @@ namespace Entries.Controller
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", "https://budget-sherpa-ui.onrender.com");
             return Ok(expandedEntryDto);
         }
     }

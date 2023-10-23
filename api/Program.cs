@@ -2,19 +2,20 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var policyName = "_myAllowSpecificOrigins";
+var policyName = "allowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: policyName,
-                      builder =>
-                      {
-                          builder
-                            .WithOrigins("https://budget-sherpa-ui.onrender.com/") // specifying the allowed origin
-                            .WithMethods("GET", "POST", "DELETE", "PUT") // defining the allowed HTTP method
-                            .AllowAnyHeader(); // allowing any header to be sent
-                      });
+        builder =>
+        {
+            builder
+            .WithOrigins("https://budget-sherpa-ui.onrender.com/")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        });
+
 });
-// Add services to the container.
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
