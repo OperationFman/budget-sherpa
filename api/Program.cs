@@ -35,9 +35,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCors(policyName);
+
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
