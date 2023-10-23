@@ -15,6 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import { Entry, EntryDto } from "../types/Entry";
 import { EntriesContext } from "./providers/EntriesProvider";
 import { ErrorContext } from "./providers/ErrorProvider";
+import { ApiDomain } from "../utility/ApiDomain";
 
 export const CountryEdit = ({
 	setModalOpen,
@@ -32,9 +33,7 @@ export const CountryEdit = ({
 	useEffect(() => {
 		const getAllCountries = async () => {
 			try {
-				const response = await fetch(
-					"https://budget-sherpa-api.onrender.com/api/entries/countries",
-				);
+				const response = await fetch(`${ApiDomain}/api/entries/countries`);
 
 				if (response.status == 200) {
 					setCountries(await response.json());
@@ -96,10 +95,7 @@ export const CountryEdit = ({
 				body: JSON.stringify(finalEntry),
 			};
 
-			const response = await fetch(
-				"https://budget-sherpa-api.onrender.com/api/entries",
-				options,
-			);
+			const response = await fetch(`${ApiDomain}/api/entries`, options);
 
 			if (response.status !== 200 ?? response.status !== 204) {
 				console.log(`Status code: ${response.status}, (Should be 200 or 204)`);

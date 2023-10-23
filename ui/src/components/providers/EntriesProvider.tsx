@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Entry, entryTypeGuard } from "../../types/Entry";
 import { ErrorContext } from "./ErrorProvider";
+import { ApiDomain } from "../../utility/ApiDomain";
 
 type ContextType = {
 	entries: undefined | Entry[];
@@ -24,7 +25,7 @@ export const EntriesProvider = ({ children }: { children: JSX.Element }) => {
 		// TODO: Automatic refresh
 
 		try {
-			const response = await fetch("https://budget-sherpa-api.onrender.com/api/entries");
+			const response = await fetch(`${ApiDomain}/api/entries`);
 
 			if (response.status !== 200) {
 				error.setMessage("Server responded with something unexpected");

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HomePage } from "./HomePage";
 import { EntriesContext } from "./components/providers/EntriesProvider";
 
@@ -15,6 +15,12 @@ export const App = () => {
 		setLongWait(true);
 	}, 5000);
 
+	useEffect(() => {
+		setTimeout(() => {
+			error.message && window.location.reload();
+		}, 8000);
+	}, [error.message]);
+
 	if (store.entries) {
 		return (
 			<div className={styles.body}>
@@ -26,7 +32,9 @@ export const App = () => {
 	if (error.message) {
 		return (
 			<div className={styles.body}>
-				<div className={styles.errorText}>Retrying...</div>
+				<div className={styles.errorContainer}>
+					<div className={styles.errorText}>Retrying...</div>
+				</div>
 			</div>
 		);
 	}

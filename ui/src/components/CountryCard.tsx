@@ -14,6 +14,7 @@ import { FullScreenModal } from "../utility/FullScreenModal";
 import { CountryEdit } from "./CountryEdit";
 import { ErrorContext } from "./providers/ErrorProvider";
 import { CircularProgress } from "@mui/material";
+import { ApiDomain } from "../utility/ApiDomain";
 
 export const CountryCard = ({
 	entry,
@@ -42,12 +43,9 @@ export const CountryCard = ({
 	const handleDelete = () => {
 		setDeleting(true);
 		try {
-			fetch(
-				`https://budget-sherpa-api.onrender.com/api/entries/id?id=${entry.id}`,
-				{
-					method: "DELETE",
-				},
-			).then(() => {
+			fetch(`${ApiDomain}/api/entries/id?id=${entry.id}`, {
+				method: "DELETE",
+			}).then(() => {
 				setDeletingElement(true);
 				store.setIsLoading(true);
 			});
