@@ -5,7 +5,7 @@ using Mappings;
 using Country.Models;
 
 
-// TODO: Validation & Useful errors, Service layer & comprehensive logging
+// TODO: Validation & Useful errors, Service layer, Comprehensive logging and Tests
 namespace Entries.Controller
 {
     [Route("api/entries")]
@@ -15,16 +15,16 @@ namespace Entries.Controller
         private readonly ILogger<EntriesController> _logger;
         private readonly ApiDbContext _context;
 
-        public EntriesController(ILogger<EntriesController> logger, ApiDbContext context)
+        public EntriesController(ApiDbContext context)
         {
-            _logger = logger;
+            // _logger = logger;
             _context = context;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<ExpandedEntryDto>> GetEntries()
         {
-            _logger.LogInformation("Getting all entries");
+            // _logger.LogInformation("Getting all entries");
 
             List<Entry> entries = _context.Entry.ToList();
 
