@@ -45,7 +45,7 @@ export const App = () => {
 				<div className={styles.errorText}>Fetching Data...</div>
 				{longWait && (
 					<div className={styles.longWait}>
-						Server startup time can be up to 30 seconds if it hasn't been run in
+						Server startup time can be up to 20 seconds if it hasn't been run in
 						a while
 					</div>
 				)}
