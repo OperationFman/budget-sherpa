@@ -12,19 +12,17 @@ namespace Entries.Controller
     [ApiController]
     public class EntriesController : ControllerBase
     {
-        private readonly ILogger<EntriesController> _logger;
         private readonly ApiDbContext _context;
 
-        public EntriesController(ILogger<EntriesController> logger, ApiDbContext context)
+        public EntriesController(ApiDbContext context)
         {
-            _logger = logger;
+
             _context = context;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<ExpandedEntryDto>> GetEntries()
         {
-            _logger.LogInformation("Getting all entries");
 
             List<Entry> entries = _context.Entry.ToList();
 
@@ -41,7 +39,6 @@ namespace Entries.Controller
         [HttpGet("countries")]
         public ActionResult<IEnumerable<CountryRate>> GetCountries()
         {
-            _logger.LogInformation("Getting all countries names");
 
             return Ok(_context.CountryRate.Select(e => e.Country).ToList());
         }
@@ -49,7 +46,6 @@ namespace Entries.Controller
         [HttpGet("country-rates")]
         public ActionResult<IEnumerable<CountryRate>> GetCountryRates()
         {
-            _logger.LogInformation("Getting all countries and their rates");
 
             return Ok(_context.CountryRate.ToList());
         }
@@ -66,7 +62,6 @@ namespace Entries.Controller
 
             if (entry == null)
             {
-                _logger.LogError("Couldn't find entry by id");
                 return NotFound();
             }
 

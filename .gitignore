@@ -1,5 +1,12 @@
-/api/out
-/api/bin
-/api/obj/Release
+api/out
+api/bin
+api/obj
+api/build
+
+*.tmp
+*.user
+*.suo
+*.sln.docstates
+*.sln
 
 .env
