@@ -3,6 +3,7 @@ using Entries.Models.Dto;
 using Entries.Models;
 using Mappings;
 using Country.Models;
+using System.Diagnostics;
 
 
 // TODO: Validation & Useful errors, Service layer & comprehensive logging
@@ -36,20 +37,6 @@ namespace Entries.Controller
             return Ok(expandedEntries);
         }
 
-        [HttpGet("countries")]
-        public ActionResult<IEnumerable<CountryRate>> GetCountries()
-        {
-
-            return Ok(_context.CountryRate.Select(e => e.Country).ToList());
-        }
-
-        [HttpGet("country-rates")]
-        public ActionResult<IEnumerable<CountryRate>> GetCountryRates()
-        {
-
-            return Ok(_context.CountryRate.ToList());
-        }
-
         [HttpGet("id")]
         public ActionResult<EntryDto> GetEntry(int id)
         {
@@ -78,7 +65,7 @@ namespace Entries.Controller
         [HttpPost]
         public ActionResult<EntryDto> CreateEntry([FromBody] EntryDto entryDto)
         {
-            if (entryDto == null || entryDto.Country == null)
+            if (entryDto == null || entryDto.Country == null || entryDto.Id > 0)
             {
                 return BadRequest();
             }
@@ -87,13 +74,10 @@ namespace Entries.Controller
 
             if (countryRate == null)
             {
+
                 return NotFound();
             }
 
-            if (entryDto.Id > 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
 
             entryDto.Id = _context.Entry.OrderByDescending(u => u.Id).FirstOrDefault()?.Id + 1 ?? 1;
             Entry mappedEntry = EntryMapper.MapEntryDtoToEntry(entryDto);
@@ -139,7 +123,7 @@ namespace Entries.Controller
         public IActionResult UpdateEntry([FromBody] EntryDto entryDto)
         {
 
-            if (entryDto == null)
+            if (entryDto == null || entryDto.Id == 0)
             {
                 return BadRequest();
             }
@@ -165,6 +149,20 @@ namespace Entries.Controller
             }
 
             return Ok(expandedEntryDto);
+        }
+
+        [HttpGet("countries")]
+        public ActionResult<IEnumerable<CountryRate>> GetCountries()
+        {
+
+            return Ok(_context.CountryRate.Select(e => e.Country).ToList());
+        }
+
+        [HttpGet("country-rates")]
+        public ActionResult<IEnumerable<CountryRate>> GetCountryRates()
+        {
+
+            return Ok(_context.CountryRate.ToList());
         }
     }
 }

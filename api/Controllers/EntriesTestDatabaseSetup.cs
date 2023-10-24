@@ -43,7 +43,11 @@ namespace IntegrationTesting
                     VALUES ('United States', 1000, 2000, 3000);
                 INSERT INTO CountryRate (
                     Country, Backpacker, Average, Luxury) 
-                    VALUES ('Australia', 2000, 3000, 4000);");
+                    VALUES ('Australia', 2000, 3000, 4000);
+                INSERT INTO CountryRate (
+                    Country, Backpacker, Average, Luxury) 
+                    VALUES ('Peru', 10, 20, 30);
+            ");
 
             _context.AddRange(
                 new Entry
