@@ -1,3 +1,5 @@
+<img width="1715" alt="Screenshot 2023-10-25 at 1 15 01 pm" src="https://github.com/OperationFman/budget-sherpa/assets/42459707/346ffad8-eb5e-4cf2-9734-afb6b330ad84">
+
 &nbsp;
 
 - [Overview](#overview)
@@ -19,40 +21,69 @@ This means you can avoid any surprises from expensive countries in your
 itinerary and travel with peace of mind.
 
 Currently a simple proof of concept built using a React frontend and .NET REST
-API on an SQLite database sourcing data from various external APIs.
+API on an SQLite database sourcing data from various external APIs and language models
+
+
+<img width="1711" alt="Screenshot 2023-10-25 at 1 16 26 pm" src="https://github.com/OperationFman/budget-sherpa/assets/42459707/4ef6e21b-77f6-4cc1-b231-15ddc9d542ad">
+<img width="1712" alt="Screenshot 2023-10-25 at 1 15 14 pm" src="https://github.com/OperationFman/budget-sherpa/assets/42459707/9405e5d3-a4e3-4912-a40c-fb57358f110d">
 
 &nbsp;
 
 ## Tech Stack
 
-Frontend - React 18 - Typescript Backend - .NET - C#
+Frontend - React 18 - Typescript 
+
+Backend - .NET 7 - C# & Docker
+
+Database - SQLite
+
+Cloud - OnRender 
+
+
+<img width="1720" alt="Screenshot 2023-10-25 at 1 16 58 pm" src="https://github.com/OperationFman/budget-sherpa/assets/42459707/ef67c08a-747f-40c0-a156-9102f15029da">
 
 &nbsp;
 
 ## Running Locally
 
-1. Clone this repository
+&nbsp;
+
+1. Download and install dependencies:
+   - Git https://git-scm.com/downloads
+   - Homebrew https://brew.sh/
+   - Node 20.9.0 https://nodejs.org/en
+   - .NET 7 SDK https://dotnet.microsoft.com/en-us/download/dotnet/7.0
+   - Optional: Docker https://www.docker.com/products/docker-desktop/
+
+2. Clone this repository
    `git clone https://github.com/OperationFman/budget-sherpa.git`
+  
+3. Front end:
+   - `brew install yarn`
+   - From the cloned repo root, `cd ui` then `yarn install`
+   - To run, do `yarn start`
+  
+4. Back end:
+   - Build and run the included Docker container, or
+   - From the cloned repo root, `cd api` then `dotnet restore`
+   - To run, do `dotnet run`
+  
+This should start the front end on `http://localhost:3000` and the backend on `http://localhost:5165`
 
-&nbsp;
+5. Optional: Database migration: Database Migration Steps
 
-2. Install dependencies: TBD
-
-&nbsp;
-
-3. Database migration: Database Migration Steps
-
-- `export PATH="$PATH:$HOME/.dotnet/tools/"`
-- `dotnet ef migrations add "initial_migrations"`
-- `dotnet ef database update`
+- `export PATH="$PATH:$HOME/.dotnet/tools/"` if dotnet tools arent setup in your path
+- from /api, `dotnet ef migrations add "initial_migrations"`
+- from /api, `dotnet ef database update` As needed for changes
 
 &nbsp; &nbsp;
 
 ## Endpoints
+You can use any of the below endpoints right now or run the backend locally and replace `https://budget-sherpa-api.onrender.com` with `http://localhost:5165`
 
-Backend endpoints available to consume with example payloads:
+### Example payloads:
 
-**GET - All expanded Endpoints** `http://localhost:5165/api/entries`
+**GET - All expanded Endpoints** `https://budget-sherpa-api.onrender.com/api/entries`
 
 ```
 [
@@ -89,7 +120,7 @@ Backend endpoints available to consume with example payloads:
 
 &nbsp;
 
-**GET - Expanded entry by ID** `http://localhost:5165/api/entries/id?id=4`
+**GET - Expanded entry by ID** `https://budget-sherpa-api.onrender.com/api/entries/id?id=4`
 
 ```
 {
@@ -111,7 +142,7 @@ Backend endpoints available to consume with example payloads:
 &nbsp;
 
 **GET - List of all available countries stored in the database**
-`http://localhost:5165/api/entries/countries`
+`https://budget-sherpa-api.onrender.com/api/entries/countries`
 
 ```
 [
@@ -137,7 +168,7 @@ Backend endpoints available to consume with example payloads:
 &nbsp;
 
 **GET - All countries AND their daily costs for backpackers, average and luxury
-travelers** `http://localhost:5165/api/entries/country-rates`
+travelers** `https://budget-sherpa-api.onrender.com/api/entries/country-rates`
 
 ```
 [
@@ -165,7 +196,7 @@ travelers** `http://localhost:5165/api/entries/country-rates`
 
 &nbsp;
 
-**POST - Create new entry** `http://localhost:5165/api/entries/`
+**POST - Create new entry** `https://budget-sherpa-api.onrender.com/api/entries`
 
 Request:
 
@@ -202,7 +233,7 @@ Response:
 
 &nbsp;
 
-**PUT - Update existing entry** `http://localhost:5165/api/entries/`
+**PUT - Update existing entry** `https://budget-sherpa-api.onrender.com/api/entries`
 
 Request:
 
@@ -240,4 +271,4 @@ Response:
 &nbsp;
 
 **DELETE - Delete existing entry by ID**
-`http://localhost:5165/api/entries/id?id=4`
+`https://budget-sherpa-api.onrender.com/api/entries/id?id=4`
