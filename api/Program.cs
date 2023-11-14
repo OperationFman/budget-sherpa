@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.FeatureManagement;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddCors(options =>
 
 });
 
+builder.Services
+    .AddFeatureManagement(builder.Configuration.GetSection("FeatureFlags"));
 
 builder.Services.AddControllers();
 
@@ -31,13 +35,12 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseCors(policyName);
-
-// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

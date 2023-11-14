@@ -3,10 +3,7 @@ using Entries.Models.Dto;
 using Entries.Models;
 using Mappings;
 using Country.Models;
-using System.Diagnostics;
 
-
-// TODO: Validation & Useful errors, Service layer & comprehensive logging
 namespace Entries.Controller
 {
     [Route("api/entries")]
@@ -17,7 +14,6 @@ namespace Entries.Controller
 
         public EntriesController(ApiDbContext context)
         {
-
             _context = context;
         }
 
@@ -164,5 +160,6 @@ namespace Entries.Controller
 
             return Ok(_context.CountryRate.ToList());
         }
+        
     }
 }
