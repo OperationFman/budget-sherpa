@@ -4,6 +4,7 @@ import { useState } from "react";
 import { formatCommaEvery3Digits } from "../../../ui/src/utility/format";
 import { FullScreenModal } from "../utility/FullScreenModal";
 import styles from "./Header.module.scss";
+import featureToggles from "../features.json";
 
 export const Header = ({
 	overviewHeadingValue,
@@ -28,7 +29,12 @@ export const Header = ({
 	return (
 		<div className={styles.header}>
 			<div className={styles.pageContainer}>
-				<h3 className={styles.banner}>Budget 🎒 Sherpa</h3>
+				<h3 className={styles.banner}>
+					<div className={styles.logo}>Budget 🎒 Sherpa</div>
+					{featureToggles.authentication && (
+						<div className={styles.authButton}></div>
+					)}
+				</h3>
 
 				<div className={styles.overviewContainer}>
 					<div className={styles.overviewNumbersContainer}>
