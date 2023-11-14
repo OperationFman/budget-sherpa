@@ -88,7 +88,7 @@
 			"parentId": "wrk_c8ec167d824545a5a22bbb857e58efc1",
 			"modified": 1695873419107,
 			"created": 1695873414498,
-			"url": "http://localhost:5165/api/entries/country-rates",
+			"url": "http://localhost:5165/api/v1/reference/country-rates",
 			"name": "All Country Rates",
 			"description": "",
 			"method": "GET",

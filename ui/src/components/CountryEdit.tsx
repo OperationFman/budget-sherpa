@@ -33,7 +33,7 @@ export const CountryEdit = ({
 	useEffect(() => {
 		const getAllCountries = async () => {
 			try {
-				const response = await fetch(`${ApiDomain}/api/entries/countries`);
+				const response = await fetch(`${ApiDomain}/api/v1/reference/countries`);
 
 				if (response.status == 200) {
 					setCountries(await response.json());

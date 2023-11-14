@@ -10,10 +10,10 @@ namespace Authentication.Controller
     {
 
         [HttpGet]
-        public async Task<IActionResult> GetEntries(IFeatureManager manager)
+        public async Task<IActionResult> GetAuth(IFeatureManager manager)
         {
 
-            if (!await manager.IsEnabledAsync("WeatherForecast"))
+            if (!await manager.IsEnabledAsync("authentication"))
             {
                 return StatusCode(StatusCodes.Status403Forbidden, "Feature flag disabled");
             }

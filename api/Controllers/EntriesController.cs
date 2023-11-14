@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Entries.Models.Dto;
 using Entries.Models;
 using Mappings;
-using Country.Models;
 
 namespace Entries.Controller
 {
@@ -147,19 +146,7 @@ namespace Entries.Controller
             return Ok(expandedEntryDto);
         }
 
-        [HttpGet("countries")]
-        public ActionResult<IEnumerable<CountryRate>> GetCountries()
-        {
-
-            return Ok(_context.CountryRate.Select(e => e.Country).ToList());
-        }
-
-        [HttpGet("country-rates")]
-        public ActionResult<IEnumerable<CountryRate>> GetCountryRates()
-        {
-
-            return Ok(_context.CountryRate.ToList());
-        }
+        
         
     }
 }
