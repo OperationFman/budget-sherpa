@@ -72,7 +72,7 @@ This should start the front end on `http://localhost:3000` and the backend on `h
 
 5. Optional: Database migration: Database Migration Steps
 
-- `export PATH="$PATH:$HOME/.dotnet/tools/"` if dotnet tools arent setup in your path
+- `export PATH="$PATH:$HOME/.dotnet/tools/"` if dotnet tools aren't setup in your path
 - from /api, `dotnet ef migrations add "initial_migrations"`
 - from /api, `dotnet ef database update` As needed for changes
 

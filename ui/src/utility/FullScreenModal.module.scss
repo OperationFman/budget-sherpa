@@ -1,0 +1,36 @@
+@import "./breakpoints";
+
+.backdrop {
+	backdrop-filter: blur(12px);
+}
+
+.box {
+	color: #ececec;
+	overflow: scroll;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 90vw;
+	height: 90vh;
+	max-width: 1250px;
+	outline: 0;
+
+	@include breakpoint(medium) {
+		overflow: auto;
+	}
+}
+
+.close {
+	position: absolute;
+	padding: 10px;
+	top: 30px;
+	right: 0;
+	border-radius: 50%;
+
+	&:hover {
+		background-color: rgba(255, 255, 255, 0.1);
+		cursor: pointer;
+		transition: linear 200ms;
+	}
+}

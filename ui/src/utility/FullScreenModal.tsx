@@ -3,37 +3,7 @@ import { Box } from "@mui/material";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
 import * as React from "react";
-
-const style = {
-	backdrop: {
-		backdropFilter: "blur(12px)",
-		fontFamily: "Inter, sans-serif",
-	},
-	box: {
-		color: "#ECECEC",
-		overflow: "scroll",
-		position: "absolute" as "absolute",
-		top: "50%",
-		left: "50%",
-		transform: "translate(-50%, -50%)",
-		width: "90vw",
-		height: "90vh",
-		maxWidth: "1250px",
-		outline: 0,
-	},
-	close: {
-		position: "absolute",
-		padding: "10px",
-		top: "30px",
-		right: 0,
-		borderRadius: "50%",
-		"&:hover": {
-			backgroundColor: "rgba(255, 255, 255, 0.1)",
-			cursor: "pointer",
-			transition: "linear 200ms",
-		},
-	},
-};
+import styles from "./FullScreenModal.module.scss";
 
 export const FullScreenModal = ({
 	open,
@@ -61,12 +31,13 @@ export const FullScreenModal = ({
 						timeout: 500,
 					},
 				}}
-				sx={style.backdrop}>
+				className={styles.backdrop}
+				sx={{ fontFamily: "Inter, sans-serif" }}>
 				<Fade in={open}>
-					<Box sx={style.box}>
+					<Box className={styles.box}>
 						<CloseRoundedIcon
 							fontSize='large'
-							sx={style.close}
+							className={styles.close}
 							onClick={handleClose}
 						/>
 						<div>{children}</div>
