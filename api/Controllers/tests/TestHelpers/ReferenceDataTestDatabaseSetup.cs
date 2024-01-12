@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IntegrationTesting
 {
-    public class DatabaseTestSetup
+    public class ReferenceDataTestDatabaseSetup
     {
         private readonly SqliteConnection _connection;
         private readonly ApiDbContext _context;
 
-        public DatabaseTestSetup()
+        public ReferenceDataTestDatabaseSetup()
         {
             _connection = new SqliteConnection("Filename=:memory:");
             _connection.Open();
@@ -19,16 +19,6 @@ namespace IntegrationTesting
                 .Options;
 
             _context = new ApiDbContext(_contextOptions);
-
-            _context.Database.ExecuteSqlRaw(@"CREATE TABLE Entry (
-                    Id INTEGER PRIMARY KEY,
-                    Country TEXT NOT NULL,
-                    SelectedCountryRate INTEGER NOT NULL,
-                    Days INTEGER NOT NULL,
-                    Commute INTEGER NOT NULL,
-                    CommuteCost INTEGER NULL,
-                    Extras INTEGER NULL
-                );");
 
             _context.Database.ExecuteSqlRaw(@"CREATE TABLE CountryRate (
                     Country TEXT PRIMARY KEY,
@@ -48,28 +38,7 @@ namespace IntegrationTesting
                     Country, Backpacker, Average, Luxury) 
                     VALUES ('Peru', 10, 20, 30);
             ");
-
-            _context.AddRange(
-                new Entry
-                {
-                    Id = 1,
-                    Country = "United States",
-                    SelectedCountryRate = SelectedCountryRate.Average,
-                    Days = 7,
-                    Commute = Commute.Flight,
-                    CommuteCost = 100,
-                    Extras = 200
-                },
-                new Entry
-                {
-                    Id = 2,
-                    Country = "Australia",
-                    SelectedCountryRate = SelectedCountryRate.Backpacker,
-                    Days = 14,
-                    Commute = Commute.Bus,
-                    CommuteCost = 1000,
-                    Extras = 0
-                });
+            
             _context.SaveChanges();
         }
 

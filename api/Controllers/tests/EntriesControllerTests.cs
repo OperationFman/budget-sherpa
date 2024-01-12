@@ -8,11 +8,11 @@ namespace IntegrationTesting
 {
     public class EntriesControllerTests
     {
-        private readonly DatabaseTestSetup _databaseTestSetup;
+        private readonly EntriesDatabaseTestSetup _databaseTestSetup;
 
         public EntriesControllerTests()
         {
-            _databaseTestSetup = new DatabaseTestSetup();
+            _databaseTestSetup = new EntriesDatabaseTestSetup();
         }
 
         [Fact]
